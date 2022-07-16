@@ -1,0 +1,50 @@
+{
+  "VersionProject": "1.0.0",
+  "VersionEditor": "1.1.0",
+  "MaxLengthSentence": 150,
+  "MaxLengthReply": 50,
+  "ListPackages": [
+    {
+      "Name": "Default",
+      "Export": true
+    }
+  ],
+  "ListActors": [
+    {
+      "ID": "Leonnie",
+      "Name": "Léonnie",
+      "Portrait": "portraits\\leonnie.jpg",
+      "Color": -13676721
+    },
+    {
+      "ID": "Vampire",
+      "Name": "Vampire",
+      "Portrait": "portraits\\vampire.jpg",
+      "Color": -13676721
+    },
+    {
+      "ID": "Fantome",
+      "Name": "Fantome",
+      "Portrait": "portraits\\fantome.jpg",
+      "Color": -13676721
+    },
+    {
+      "ID": "Squelette",
+      "Name": "Squelette",
+      "Portrait": "portraits\\squelette.jpg",
+      "Color": -13676721
+    },
+    {
+      "ID": "Citrouille",
+      "Name": "Citrouille",
+      "Portrait": "portraits\\citrouille.jpg",
+      "Color": -13676721
+    },
+    {
+      "ID": "Narration",
+      "Name": "Narration",
+      "Portrait": "portraits\\Sans titre.jpg",
+      "Color": -13676721
+    }
+  ]
+}

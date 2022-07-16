@@ -1,0 +1,140 @@
+{
+  "stories": [
+    {
+      "id": 0,
+      "name": "Halloween",
+      "dialogues": "dialog-halloween",
+      "backgrounds": [
+        {
+          "id": 0,
+          "name": "cuisine-fond",
+          "src": "https://i.ibb.co/bPxMrZy/cuisine-fond.png"
+        },
+        {
+          "id": 1,
+          "name": "champ",
+          "src": "https://i.ibb.co/8jBQLqn/champ.png"
+        },
+        {
+          "id": 2,
+          "name": "intro",
+          "src": "https://i.ibb.co/QXSSKXP/intro.png"
+        },
+        {
+          "id": 3,
+          "name": "manoir",
+          "src": "https://i.ibb.co/Dt9VrXg/manoir.png"
+        },
+        {
+          "id": 4,
+          "name": "salon",
+          "src": "https://i.ibb.co/bRYNKbN/salon.png"
+        },
+        {
+          "id": 5,
+          "name": "ville",
+          "src": "https://i.ibb.co/XbXCyYQ/town.png"
+        },
+        {
+          "id": 6,
+          "name": "ville",
+          "src": [
+            "https://i.ibb.co/KrtGz4J/Village-arriere-plan.png",
+            "https://i.ibb.co/3TyZf61/Village-avant-plan.png"
+          ]
+        }
+      ],
+      "characters": [
+        {
+          "id": 0,
+          "name_id": "Vampire",
+          "name": "Vampire Pranker",
+          "animSets": [
+            {
+              "id": 0,
+              "name": "idle",
+              "src": "https://media2.giphy.com/media/2kZPecmkCZ1srIbZsW/giphy.gif?cid=790b7611376500df79ac155ae139d2f56a2c24072e9e10e1&rid=giphy.gif"
+            },
+            {
+              "id": 1,
+              "name": "action",
+              "src": "https://giphy.com/gifs/transparent-S25vpafYcft1uyM2xt"
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "name_id": "Leonnie",
+          "name": "Léonnie",
+          "animSets": [
+            {
+              "id": 0,
+              "name": "idle",
+              "src": "https://media2.giphy.com/media/2kZPecmkCZ1srIbZsW/giphy.gif?cid=790b7611376500df79ac155ae139d2f56a2c24072e9e10e1&rid=giphy.gif"
+            },
+            {
+              "id": 1,
+              "name": "action",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name_id": "Squelette",
+          "name": "Squelette Maire",
+          "animSets": [
+            {
+              "id": 0,
+              "name": "idle",
+              "src": ""
+            },
+            {
+              "id": 1,
+              "name": "action",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name_id": "Fantome",
+          "name": "Fantôme Poucave",
+          "animSets": [
+            {
+              "id": 0,
+              "name": "idle",
+              "src": ""
+            },
+            {
+              "id": 1,
+              "name": "action",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name_id": "Citrouille",
+          "name": "Citrouille Gigamax",
+          "animSets": [
+            {
+              "id": 0,
+              "name": "idle",
+              "src": ""
+            },
+            {
+              "id": 1,
+              "name": "action",
+              "src": ""
+            }
+          ]
+        },
+        {
+          "id": -1,
+          "name_id": "Narration"
+        }
+      ]
+    }
+  ]
+}
