@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TheBooks from '@/components/BooksView/TheBooks.vue'
+</script>
 
 <template>
   <main>
-    <p>pouet</p>
+    <TheBooks />
   </main>
 </template>
