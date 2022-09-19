@@ -1,0 +1,23 @@
+# 01 Start
+C: Léonnie la sorcière vit paisiblement dans la petite ville de Toussaint-Sainte-Peur.
+C: Sur son petit cottage, se dresse une maison à pattes de poules, ainsi qu'un champ de citrouilles.
+C: Léonnie est très fière de ses citrouilles.
+C: Buvant une infusion de ses cucurbitacées préférés, elle se prépare à sortir voir son potager.
+C: Leonnie est en effet chargé de décorer la ville pour Halloween, avec ses somptueuses citrouilles !
+goto # 02 Waiting
+
+# 02 Waiting
+C: Mais rien ne presse ...
+- Boire une lampée
+	C: Mmh, au bon goût de citrouille !
+	goto # 02 Waiting
+- Aller voir les citrouilles
+ 	goto # 03 Pumpkins
+
+# 03 Pumpkins
+C: Mais ?! Où sont elles passées ce n'est pas possible ! Plus une courge à l'horizon !
+Vampire: Oh non ! ton champ est dans de beaux draps !
+Léonnie: As-tu vu quelque chose ?!
+C: A suivre...
+- The end
+	goto # END
