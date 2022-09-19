@@ -9,13 +9,13 @@
     "build-only": "vite build"
   },
   "dependencies": {
-    "@nathanhoad/saywhat": "^4.0.0",
     "axios": "^0.21.4",
     "pug": "^3.0.2",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2"
   },
   "devDependencies": {
+    "@nathanhoad/saywhat": "^4.0.0",
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/node": "^16.11.43",
     "@vitejs/plugin-vue": "^2.3.3",

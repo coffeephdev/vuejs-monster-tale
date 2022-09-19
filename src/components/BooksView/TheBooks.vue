@@ -1,6 +1,6 @@
 <template lang="pug">
 div(class="content")
-  book-button(title="Halloween")
+  book-button(title="Halloween" @click="handleBookChoice('halloween')")
 
 </template>
 
