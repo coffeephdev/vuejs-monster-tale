@@ -1,32 +1,41 @@
 <template lang="pug">
-div( class="content")
+div( class="content" :style="backgroundClass")
+  div(class="dialogue")
+    p(v-if="line") {{line.dialogue}}
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import DialogueManager from '@nathanhoad/saywhat'
 import DialogueResource from '../../assets/halloween/halloween.json'
 
+const assetPath = '../src/assets/halloween'
+
 const line = ref()
+const backgroundSelected = ref('intro')
+
+const backgroundClass = computed(
+  () => `background-image: url(${assetPath}/backgrounds/${backgroundSelected.value}.png)`
+)
 
 onMounted(async () => {
   line.value = await DialogueManager.getNextDialogueLine(
     DialogueResource.titles['01 Start'],
     DialogueResource
   )
-}),
-  console.log(line)
+  console.log(line.value.dialogue)
+})
+
 DialogueManager.getNextDialogueLine(line.nextId, DialogueResource)
 </script>
 
 <style scoped lang="scss">
 .content {
-  background: no-repeat url(../../assets/img/monster-tale-menu.png);
-  background-size: cover;
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   position: relative;
+}
+.dialogue {
+  float: bottom;
 }
 </style>

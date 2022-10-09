@@ -15,5 +15,8 @@
     "lib": ["esnext", "dom"],
     "types": ["vite/client"]
   },
+  "vueCompilerOptions": {
+    "plugins": ["@volar/vue-language-plugin-pug"]
+  },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
