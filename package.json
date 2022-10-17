@@ -4,8 +4,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "vite",
-    "build": "build-only",
-    "preview": "vite preview --port 4173",
+    "build": "build",
     "build-only": "vite build"
   },
   "dependencies": {
