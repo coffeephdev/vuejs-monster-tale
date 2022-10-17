@@ -9,7 +9,7 @@ import { ref, onMounted, computed } from 'vue'
 import DialogueManager from '@nathanhoad/saywhat'
 import DialogueResource from '../../assets/halloween/halloween.json'
 
-const assetPath = '../src/assets/halloween'
+const assetPath = '../src/assets'
 
 const line = ref()
 const backgroundSelected = ref('intro')
