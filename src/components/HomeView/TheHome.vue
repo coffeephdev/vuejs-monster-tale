@@ -21,7 +21,7 @@ export default defineComponent({
 
 <style lang="scss">
 .welcome {
-  background: no-repeat url(../../assets/img/monster-tale.png);
+  background: no-repeat url(https://www.givr.fr/monster-tale-images/monster-tale.png);
   background-size: cover;
   width: 100%;
   height: 100%;

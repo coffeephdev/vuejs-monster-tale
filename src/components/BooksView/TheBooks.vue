@@ -16,7 +16,7 @@ const handleBookChoice = (book: string) => {
 
 <style lang="scss">
 .content {
-  background: no-repeat url(../../assets/img/monster-tale-menu.png);
+  background: no-repeat url(https://www.givr.fr/monster-tale-images/monster-tale-menu.png);
   background-size: cover;
   width: 100%;
   height: 100%;

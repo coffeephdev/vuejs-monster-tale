@@ -9,14 +9,15 @@ import { ref, onMounted, computed } from 'vue'
 import DialogueManager from '@nathanhoad/saywhat'
 import DialogueResource from '../../assets/halloween/halloween.json'
 
-const assetPath = '../src/assets'
+const imgPath = 'https://www.givr.fr/monster-tale-images/halloween'
 
 const line = ref()
 const backgroundSelected = ref('intro')
 
 const backgroundClass = computed(
-  () => `background-image: url(${assetPath}/backgrounds/${backgroundSelected.value}.png)`
+  () => `background-image: url(${imgPath}/backgrounds/${backgroundSelected.value}.png)`
 )
+console.log(backgroundClass.value)
 
 onMounted(async () => {
   line.value = await DialogueManager.getNextDialogueLine(
