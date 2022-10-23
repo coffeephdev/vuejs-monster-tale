@@ -19,7 +19,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .welcome {
   background: no-repeat url(https://www.givr.fr/monster-tale-images/monster-tale.png);
   background-size: cover;
