@@ -16,4 +16,14 @@ const capitalizedBook = computed(() => {
 const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value}.vue`))
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.book-content {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  .dialogue {
+    float: bottom;
+  }
+}
+</style>
