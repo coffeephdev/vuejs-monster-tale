@@ -1,13 +1,20 @@
 <template>
   <div class="book-content" :style="backgroundClass">
-    <div class="dialogue">
-      <p v-if="line">{{ currentDialogue }}</p>
-      <button v-if="hasNextDialogue" @click="nextDialogue()">-></button>
-      <template v-if="hasReponses">
-        <button v-for="reponse in line.responses" @click="nextDialogue(reponse.nextId)">
+    <div class="dialogue-wrapper">
+      <div class="dialogue">
+        <p v-if="line">{{ currentDialogue }}</p>
+      </div>
+      <div class="response-wrapper" v-if="hasReponses">
+        <button
+          class="response"
+          v-for="reponse in line.responses"
+          @click="nextDialogue(reponse.nextId)"
+        >
           {{ reponse.prompt }}
         </button>
-      </template>
+      </div>
+
+      <button class="next-dialogue-button" v-if="hasNextDialogue" @click="nextDialogue()">☞</button>
     </div>
   </div>
 </template>
@@ -37,6 +44,10 @@ const hasNextDialogue = computed(() => {
   return line.value && line.value.nextId && !hasReponses.value
 })
 
+const responses = computed(() => {
+  return line.value && line.value.responses.length != 0
+})
+
 const hasReponses = computed(() => {
   return line.value && line.value.responses.length != 0
 })
@@ -47,9 +58,6 @@ const currentDialogue = computed(() => {
 
 async function nextDialogue(reponseNextId?: number) {
   const next_id = reponseNextId ? reponseNextId : line.value.nextId
-  console.log(next_id)
-
   line.value = await DialogueManager.getNextDialogueLine(next_id, DialogueResource)
-  console.log(line.value)
 }
 </script>
