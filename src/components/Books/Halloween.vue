@@ -20,19 +20,37 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, defineProps} from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import DialogueManager from '@nathanhoad/saywhat'
-import DialogueResource from '../../assets/halloween/halloween.json'
+import DialogueResource from '@/assets/halloween/halloween.json'
+import { useBookStore } from './book-store'
 
-const props = defineProps{(background:string})
+DialogueManager.gameStates = [
+  {
+    change_backgrounds(names: string) {
+      store.backgrounds = names.split(' ')
+    },
+  },
+]
+
+const store = useBookStore()
 
 const imgPath = 'https://www.givr.fr/monster-tale-images/halloween'
 
 const line = ref()
 
-const backgroundClass = computed(
-  () => `background-image: url(${imgPath}/backgrounds/${props.background}.png)`
-)
+const backgroundClass = computed(() => {
+  let result = 'background-image:  '
+  store.backgrounds.forEach((image, index) => {
+    result += `url(${imgPath}/backgrounds/${image}.png)`
+    if (index != store.backgrounds.length - 1) {
+      result += ', '
+    }
+  })
+  console.log(result)
+
+  return result
+})
 
 onMounted(async () => {
   line.value = await DialogueManager.getNextDialogueLine(

@@ -1,18 +1,16 @@
 <template lang="pug">
-Book(:background="backgroundSelected")
+Book
 </template>
 
 <script setup lang="ts">
 import { defineAsyncComponent, computed, ref } from 'vue'
-
-const backgroundSelected = ref('intro')
 
 const props = defineProps({
   book: String,
 })
 
 const capitalizedBook = computed(() => {
-  return props.book.charAt(0).toUpperCase() + props.book.slice(1)
+  return props.book!.charAt(0).toUpperCase() + props.book!.slice(1)
 })
 
 const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value}.vue`))
@@ -24,6 +22,7 @@ const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value
   justify-content: center;
   position: relative;
   background-size: contain;
+  background-repeat: no-repeat;
 
   .dialogue-wrapper {
     border: 1px white solid;
