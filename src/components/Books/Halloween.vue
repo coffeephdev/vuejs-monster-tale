@@ -47,8 +47,6 @@ const backgroundClass = computed(() => {
       result += ', '
     }
   })
-  console.log(result)
-
   return result
 })
 
