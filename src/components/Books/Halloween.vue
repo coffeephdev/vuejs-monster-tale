@@ -20,17 +20,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, defineProps} from 'vue'
 import DialogueManager from '@nathanhoad/saywhat'
 import DialogueResource from '../../assets/halloween/halloween.json'
+
+const props = defineProps{(background:string})
 
 const imgPath = 'https://www.givr.fr/monster-tale-images/halloween'
 
 const line = ref()
-const backgroundSelected = ref('intro')
 
 const backgroundClass = computed(
-  () => `background-image: url(${imgPath}/backgrounds/${backgroundSelected.value}.png)`
+  () => `background-image: url(${imgPath}/backgrounds/${props.background}.png)`
 )
 
 onMounted(async () => {

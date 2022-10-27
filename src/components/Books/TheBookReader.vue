@@ -1,9 +1,11 @@
 <template lang="pug">
-Book
+Book(:background="backgroundSelected")
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, computed } from 'vue'
+import { defineAsyncComponent, computed, ref } from 'vue'
+
+const backgroundSelected = ref('intro')
 
 const props = defineProps({
   book: String,
