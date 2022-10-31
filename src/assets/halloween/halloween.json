@@ -1,1 +1,192 @@
-{"lines":{"1":{"character":"C","next_id":"2","replacements":[],"text":"Léonnie la sorcière vit paisiblement dans la petite ville de Toussaint-Sainte-Peur.","type":"dialogue"},"10":{"character":"C","next_id":"11","replacements":[],"text":"Mais rien ne presse ...","type":"dialogue"},"11":{"condition":null,"next_id":"12","next_id_after":"","replacements":[],"responses":["11","16"],"text":"Boire une lampée","type":"response"},"12":{"mutation":{"lhs_args":["\"tea salon\""],"lhs_function":"change_backgrounds","lhs_type":"function"},"next_id":"13","type":"mutation"},"13":{"character":"C","next_id":"14","replacements":[],"text":"Mmh, au bon goût de citrouille !","type":"dialogue"},"14":{"mutation":{"lhs_args":["\"salon\""],"lhs_function":"change_backgrounds","lhs_type":"function"},"next_id":"15","type":"mutation"},"15":{"next_id":"10","type":"goto"},"16":{"condition":null,"next_id":"17","next_id_after":"","replacements":[],"responses":[],"text":"Aller voir les citrouilles","type":"response"},"17":{"next_id":"20","type":"goto"},"2":{"character":"C","next_id":"3","replacements":[],"text":"Sur son petit cottage, se dresse une maison à pattes de poules, ainsi qu'un champ de citrouilles.","type":"dialogue"},"20":{"mutation":{"lhs_args":["\"champ\""],"lhs_function":"change_backgrounds","lhs_type":"function"},"next_id":"21","type":"mutation"},"21":{"character":"C","next_id":"22","replacements":[],"text":"Mais ?! Où sont elles passées ce n'est pas possible ! Plus une courge à l'horizon !","type":"dialogue"},"22":{"character":"Fantôme","next_id":"23","replacements":[],"text":"Oh non ! ton champ est dans de beaux draps !","type":"dialogue"},"23":{"character":"Léonnie","next_id":"24","replacements":[],"text":"As-tu vu quelque chose ?!","type":"dialogue"},"24":{"character":"C","next_id":"25","replacements":[],"text":"A suivre...","type":"dialogue"},"25":{"condition":null,"next_id":"26","next_id_after":"end","replacements":[],"responses":["25"],"text":"The end","type":"response"},"26":{"next_id":"end","type":"goto"},"3":{"character":"C","next_id":"4","replacements":[],"text":"Léonnie est très fière de ses citrouilles.","type":"dialogue"},"4":{"mutation":{"lhs_args":["\"salon\""],"lhs_function":"change_backgrounds","lhs_type":"function"},"next_id":"5","type":"mutation"},"5":{"character":"C","next_id":"6","replacements":[],"text":"Buvant une infusion de ses cucurbitacées préférés, elle se prépare à sortir voir son potager.","type":"dialogue"},"6":{"character":"C","next_id":"7","replacements":[],"text":"Leonnie est en effet chargé de décorer la ville pour Halloween, avec ses somptueuses citrouilles !","type":"dialogue"},"7":{"next_id":"10","type":"goto"}},"titles":{"01 Start":"1","02 Waiting":"10","03 Pumpkins":"20"}}
+{
+  "lines": {
+    "1": {
+      "character": "",
+      "next_id": "2",
+      "replacements": [],
+      "text": "Léonnie la sorcière vit paisiblement dans la petite ville de Toussaint-Sainte-Peur.",
+      "type": "dialogue"
+    },
+    "10": {
+      "character": "",
+      "next_id": "11",
+      "replacements": [],
+      "text": "Mais rien ne presse ...",
+      "type": "dialogue"
+    },
+    "11": {
+      "condition": null,
+      "next_id": "12",
+      "next_id_after": "",
+      "replacements": [],
+      "responses": ["11", "16"],
+      "text": "Boire une lampée",
+      "type": "response"
+    },
+    "12": {
+      "mutation": {
+        "lhs_args": ["\"tea salon\""],
+        "lhs_function": "change_backgrounds",
+        "lhs_type": "function"
+      },
+      "next_id": "13",
+      "type": "mutation"
+    },
+    "13": {
+      "character": "",
+      "next_id": "14",
+      "replacements": [],
+      "text": "Mmh, au bon goût de citrouille !",
+      "type": "dialogue"
+    },
+    "14": {
+      "mutation": {
+        "lhs_args": ["\"salon\""],
+        "lhs_function": "change_backgrounds",
+        "lhs_type": "function"
+      },
+      "next_id": "15",
+      "type": "mutation"
+    },
+    "15": { "next_id": "10", "type": "goto" },
+    "16": {
+      "condition": null,
+      "next_id": "17",
+      "next_id_after": "",
+      "replacements": [],
+      "responses": [],
+      "text": "Aller voir les citrouilles",
+      "type": "response"
+    },
+    "17": { "next_id": "20", "type": "goto" },
+    "2": {
+      "character": "",
+      "next_id": "3",
+      "replacements": [],
+      "text": "Sur son petit cottage, se dresse une maison à pattes de poules, ainsi qu'un champ de citrouilles.",
+      "type": "dialogue"
+    },
+    "20": {
+      "mutation": {
+        "lhs_args": ["\"champ\""],
+        "lhs_function": "change_backgrounds",
+        "lhs_type": "function"
+      },
+      "next_id": "21",
+      "type": "mutation"
+    },
+    "21": {
+      "character": "",
+      "next_id": "22",
+      "replacements": [],
+      "text": "Mais ?! Où sont elles passées, ce n'est pas possible ! Plus une courge à l'horizon !",
+      "type": "dialogue"
+    },
+    "22": {
+      "mutation": {
+        "lhs_args": ["\"fantome 50 10 0.65\""],
+        "lhs_function": "spawn_char",
+        "lhs_type": "function"
+      },
+      "next_id": "23",
+      "type": "mutation"
+    },
+    "23": {
+      "character": "Fantôme",
+      "next_id": "24",
+      "replacements": [],
+      "text": "Oh non ! ton champ est dans de beaux draps !",
+      "type": "dialogue"
+    },
+    "24": {
+      "character": "Léonnie",
+      "next_id": "25",
+      "replacements": [],
+      "text": "As-tu vu quelque chose ?!",
+      "type": "dialogue"
+    },
+    "25": {
+      "mutation": {
+        "lhs_args": ["\"fantome\""],
+        "lhs_function": "remove_char",
+        "lhs_type": "function"
+      },
+      "next_id": "26",
+      "type": "mutation"
+    },
+    "26": {
+      "mutation": {
+        "lhs_args": ["\"vampire 50 10 0.65\""],
+        "lhs_function": "spawn_char",
+        "lhs_type": "function"
+      },
+      "next_id": "27",
+      "type": "mutation"
+    },
+    "27": {
+      "character": "Vampire",
+      "next_id": "28",
+      "replacements": [],
+      "text": "Moi j'ai une opinion",
+      "type": "dialogue"
+    },
+    "28": {
+      "mutation": {
+        "lhs_args": ["\"vampire\""],
+        "lhs_function": "remove_char",
+        "lhs_type": "function"
+      },
+      "next_id": "29",
+      "type": "mutation"
+    },
+    "29": {
+      "character": "",
+      "next_id": "30",
+      "replacements": [],
+      "text": "A suivre...",
+      "type": "dialogue"
+    },
+    "3": {
+      "character": "",
+      "next_id": "4",
+      "replacements": [],
+      "text": "Léonnie est très fière de ses citrouilles.",
+      "type": "dialogue"
+    },
+    "30": {
+      "condition": null,
+      "next_id": "31",
+      "next_id_after": "end",
+      "replacements": [],
+      "responses": ["30"],
+      "text": "The end",
+      "type": "response"
+    },
+    "31": { "next_id": "end", "type": "goto" },
+    "4": {
+      "mutation": {
+        "lhs_args": ["\"salon\""],
+        "lhs_function": "change_backgrounds",
+        "lhs_type": "function"
+      },
+      "next_id": "5",
+      "type": "mutation"
+    },
+    "5": {
+      "character": "",
+      "next_id": "6",
+      "replacements": [],
+      "text": "Buvant une infusion de ses cucurbitacés préférés, elle se prépare à sortir voir son potager.",
+      "type": "dialogue"
+    },
+    "6": {
+      "character": "",
+      "next_id": "7",
+      "replacements": [],
+      "text": "Leonnie est en effet chargé de décorer la ville pour Halloween, avec ses somptueuses citrouilles !",
+      "type": "dialogue"
+    },
+    "7": { "next_id": "10", "type": "goto" }
+  },
+  "titles": { "01 Start": "1", "02 Waiting": "10", "03 Pumpkins": "20" }
+}

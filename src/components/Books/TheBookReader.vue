@@ -24,6 +24,10 @@ const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value
   background-size: contain;
   background-repeat: no-repeat;
 
+  .character-gif {
+    opacity: 0;
+  }
+
   .dialogue-wrapper {
     border: 1px white solid;
     border-radius: 0.6vw;
@@ -38,6 +42,20 @@ const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value
     justify-content: top;
     color: white;
     z-index: 10;
+
+    .character-name {
+      position: absolute;
+      left: 3vw;
+      top: -1.8vw;
+      display: flex;
+      flex-direction: column;
+      font-size: 1.8vw;
+      background-color: #151124;
+      border: var(--light) solid 1px;
+      border-radius: 5vw;
+      padding: 0 0.8vw;
+      margin-left: 2vw;
+    }
 
     .dialogue {
       float: bottom;
