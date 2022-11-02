@@ -4,7 +4,7 @@ import { ref } from 'vue'
 export const useBookStore = defineStore('book', () => {
   const chars = ref<(Char | undefined)[]>([])
   const backgrounds = ref(['intro'])
-  const spawnDelay = 0.5
+  const spawnCharDelay = 0.5
 
-  return { backgrounds, chars, spawnDelay }
+  return { backgrounds, chars, spawnCharDelay: spawnCharDelay }
 })

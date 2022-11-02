@@ -2,6 +2,7 @@
   <div class="book-content" :style="backgroundClass">
     <template v-for="char in store.chars">
       <img
+        v-if="char"
         class="character-gif"
         :src="getCharSrc(char.name)"
         :style="getCharStyle(char)"
@@ -65,22 +66,22 @@ DialogueManager.gameStates = [
           item = undefined
 
           clearInterval(timer)
-        }, store.spawnDelay * 1000)
+        }, store.spawnCharDelay * 1000)
       }
     },
   },
 ]
 
 const store = useBookStore()
-
-const imgPath = 'https://www.givr.fr/monster-tale-images/halloween'
-
+const dataPath = 'https://www.givr.fr/monster-tale-images/halloween'
 const line = ref()
+const audioClickFeedback = new Audio(`${dataPath}/audio/click.mp3`)
+const audioBackground = new Audio(`${dataPath}/audio/TipToes - Myuu.mp3`)
 
 const backgroundClass = computed(() => {
   let result = 'background-image: '
   store.backgrounds.forEach((image, index) => {
-    result += `url(${imgPath}/backgrounds/${image}.png)`
+    result += `url(${dataPath}/backgrounds/${image}.png)`
     if (index != store.backgrounds.length - 1) {
       result += ', '
     }
@@ -93,7 +94,11 @@ onMounted(async () => {
     DialogueResource.titles['01 Start'],
     DialogueResource
   )
+  Array.of(audioBackground, audioClickFeedback).forEach((audio) => (audio.volume = 0.5))
+  audioBackground.loop = true
+  audioBackground.play()
 })
+
 const characterName = computed<string | undefined>(() => {
   return line.value?.character ?? undefined
 })
@@ -115,12 +120,14 @@ const currentDialogue = computed<string | undefined>(() => {
 })
 
 async function nextDialogue(reponseNextId?: number) {
+  audioClickFeedback.currentTime = 0
+  audioClickFeedback.play()
   const next_id = reponseNextId ? reponseNextId : line.value.nextId
   line.value = await DialogueManager.getNextDialogueLine(next_id, DialogueResource)
 }
 
 function getCharSrc(name: string) {
-  return `${imgPath}/animations/${name}.gif`
+  return `${dataPath}/animations/${name}.gif`
 }
 
 function getCharStyle(char: Char) {
@@ -129,7 +136,7 @@ function getCharStyle(char: Char) {
   result += `top:${char.posY}%;`
   result += `left:${char.posX}%;`
   result += `opacity:${char.opacity};`
-  result += `transition: opacity ${store.spawnDelay}s;`
+  result += `transition: opacity ${store.spawnCharDelay}s;`
   return result
 }
 </script>
