@@ -154,15 +154,24 @@
       "type": "dialogue"
     },
     "30": {
-      "condition": null,
+      "mutation": {
+        "lhs_args": ["\"fantome 50 10 0.65\""],
+        "lhs_function": "spawn_char",
+        "lhs_type": "function"
+      },
       "next_id": "31",
+      "type": "mutation"
+    },
+    "31": {
+      "condition": null,
+      "next_id": "32",
       "next_id_after": "end",
       "replacements": [],
-      "responses": ["30"],
+      "responses": ["31"],
       "text": "The end",
       "type": "response"
     },
-    "31": { "next_id": "end", "type": "goto" },
+    "32": { "next_id": "end", "type": "goto" },
     "4": {
       "mutation": {
         "lhs_args": ["\"salon\""],

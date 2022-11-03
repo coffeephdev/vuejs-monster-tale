@@ -28,5 +28,6 @@ do spawn_char("vampire 50 10 0.65")
 Vampire: Moi j'ai une opinion 
 do remove_char("vampire")
 A suivre...
+do spawn_char("fantome 50 10 0.65")
 - The end
 	goto # END
