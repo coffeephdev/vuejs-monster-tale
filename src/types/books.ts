@@ -1,4 +1,4 @@
-type Char = {
+type StoryItem = {
   name: string
   posX: number
   posY: number

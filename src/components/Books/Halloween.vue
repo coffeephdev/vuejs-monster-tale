@@ -24,14 +24,24 @@
         ☞
       </button>
     </div>
+    <template v-for="item in store.items">
+      <img
+        v-if="item"
+        class="character-gif"
+        :src="getItemSrc(item.name)"
+        :style="getStoryItemStyle(item)"
+        alt="Character"
+      />
+    </template>
     <template v-for="char in store.chars">
       <img
         v-if="char"
         class="character-gif"
         :src="getCharSrc(char.name)"
-        :style="getCharStyle(char)"
+        :style="getStoryItemStyle(char)"
         alt="Character"
-    /></template>
+      />
+    </template>
   </div>
 </template>
 
@@ -54,32 +64,19 @@ DialogueManager.gameStates = [
     },
 
     spawn_char(param: string) {
-      const args = param.split(' ')
-      const newChar = {
-        name: args[0],
-        posX: parseInt(args[1]),
-        posY: parseInt(args[2]),
-        size: parseFloat(args[3]),
-        opacity: 0,
-      }
+      store.Spawn(param, store.chars)
+    },
 
-      const length = store.chars.push(newChar)
-      setTimeout(() => {
-        store.chars[length - 1]!.opacity = 1
-      }, 1)
+    spawn_item(param: string) {
+      store.Spawn(param, store.items)
     },
 
     remove_char(name: string) {
-      const char = store.chars.find((item) => item?.name === name)
-      if (char) {
-        char.opacity = 0
-        setTimeout(() => {
-          const index = store.chars.findIndex((item) => item?.name === char.name)
-          if (index != -1) {
-            store.chars[index] = undefined
-          }
-        }, store.transitionDelay * 1000)
-      }
+      store.Unspawn(name, store.chars)
+    },
+
+    remove_item(name: string) {
+      store.Unspawn(name, store.items)
     },
   },
 ]
@@ -93,7 +90,7 @@ const audioBackground = new Audio(`${dataPath}/audio/TipToes - Myuu.mp3`)
 const backgroundClass = computed(() => {
   let result = 'background-image: '
   store.backgrounds.forEach((image, index) => {
-    result += `url(${dataPath}/backgrounds/${image}.png)`
+    result += `url(${dataPath}/backgrounds/${image})`
     if (index != store.backgrounds.length - 1) {
       result += ', '
     }
@@ -152,15 +149,19 @@ async function nextDialogue(reponseNextId?: number) {
 }
 
 function getCharSrc(name: string) {
-  return `${dataPath}/animations/${name}.gif`
+  return `${dataPath}/characters/${name}`
 }
 
-function getCharStyle(char: Char) {
+function getItemSrc(name: string) {
+  return `${dataPath}/items/${name}`
+}
+
+function getStoryItemStyle(storyItem: StoryItem) {
   let result = `position:absolute;`
-  result += `height:${char.size * 100}%;`
-  result += `top:${char.posY}%;`
-  result += `left:${char.posX}%;`
-  result += `opacity:${char.opacity};`
+  result += `height:${storyItem.size * 100}%;`
+  result += `top:${storyItem.posY}%;`
+  result += `left:${storyItem.posX}%;`
+  result += `opacity:${storyItem.opacity};`
   result += `transition: opacity ${store.transitionDelay}s;`
   return result
 }

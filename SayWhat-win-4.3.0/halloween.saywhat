@@ -10,9 +10,9 @@ goto # 02 Waiting
 # 02 Waiting
 Mais rien ne presse ...
 - Boire une lampée
-	do change_backgrounds("tea salon")
+	do spawn_item("tea 30 10 0.6")
 	Mmh, au bon goût de citrouille !
-	do change_backgrounds("salon")
+	do remove_item("tea")
 	goto # 02 Waiting
 - Aller voir les citrouilles
  	goto # 03 Pumpkins
@@ -20,14 +20,15 @@ Mais rien ne presse ...
 # 03 Pumpkins
 do change_backgrounds("champ")
 Mais ?! Où sont elles passées, ce n'est pas possible ! Plus une courge à l'horizon !
-do spawn_char("fantome 50 10 0.65")
+do spawn_char("fantome 60 10 0.65")
 Fantôme: Oh non ! ton champ est dans de beaux draps !
 Léonnie: As-tu vu quelque chose ?!
 do remove_char("fantome")
-do spawn_char("vampire 50 10 0.65")
+do spawn_char("vampire 40 10 0.65")
 Vampire: Moi j'ai une opinion 
 do remove_char("vampire")
-A suivre...
 do spawn_char("fantome 50 10 0.65")
+A suivre...
+do remove_char("fantome")
 - The end
 	goto # END
