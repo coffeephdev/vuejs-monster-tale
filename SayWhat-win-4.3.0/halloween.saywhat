@@ -1,9 +1,11 @@
 # 01 Start
 Léonnie la sorcière vit paisiblement dans la petite ville de Toussaint-Sainte-Peur.
+Sa spécialité ? Les potions !
 Sur son petit cottage, se dresse une maison à pattes de poules, ainsi qu'un champ de citrouilles.
 Léonnie est très fière de ses citrouilles.
 do change_backgrounds("salon")
 Buvant une infusion de ses cucurbitacés préférés, elle se prépare à sortir voir son potager.
+Ayant répandu la veille sa fameuse potion revigorante pour citrouille, elle a hâte de voir le résultat.
 Leonnie est en effet chargé de décorer la ville pour Halloween, avec ses somptueuses citrouilles !
 goto # 02 Waiting
 
@@ -11,7 +13,7 @@ goto # 02 Waiting
 Mais rien ne presse ...
 - Boire une lampée
 	do spawn_item("tea 30 10 0.6")
-	Mmh, au bon goût de citrouille !
+	Mmh, au bon goût de citrouille ! Sa tisane préférée.
 	do remove_item("tea")
 	goto # 02 Waiting
 - Aller voir les citrouilles
@@ -20,14 +22,30 @@ Mais rien ne presse ...
 # 03 Pumpkins
 do change_backgrounds("champ")
 Mais ?! Où sont elles passées, ce n'est pas possible ! Plus une courge à l'horizon !
-do spawn_char("fantome 60 10 0.65")
-Fantôme: Oh non ! ton champ est dans de beaux draps !
-Léonnie: As-tu vu quelque chose ?!
+Léonnie: Ce n'est pas possible ?! Halloween est demain !
+Léonnie:  Comment vais-je faire ?!
+do spawn_char("fantome 30 20 0.4")
+Fantôme: Oh là là...
+Léonnie: Fantôme, c'est toi ? Je t'en prie, as-tu vu quelque chose ?
+Fantôme: Oh... On est dans de beaux draps...
 do remove_char("fantome")
-do spawn_char("vampire 40 10 0.65")
-Vampire: Moi j'ai une opinion 
-do remove_char("vampire")
-do spawn_char("fantome 50 10 0.65")
+Léonnie: Enfin, ce n'est pas le moment de me laisser tomber, reviens !
+do spawn_char("fantome 45 10 0.6")
+Fantôme: Je... J'ai vu... Enfin... Il faisait nuit...
+Léonnie: (Un jour, j'en ferais ma taie d'oreiller...)
+Léonnie: Si je ne trouve pas de solution, je devrais me trouver un nouvel endroit pour vivre !
+Léonnie: Ce jour là, Fantôme, tu pourras dire adieu à l'adoucissant !
+do remove_char("fantome")
+do spawn_char("fantome 35 20 0.70")
+Fantôme: Très bien, très bien ! Ecoute, ça va te paraitre bizarre...
+Fantôme: Ne te froisse pas... C'est comme si tes citrouilles avaient pris vie, et s'étaient enfuies !
+Léonnie: Quoi ?! Comment ça ? Mais où sont-elles allées ?
+Fantôme: C'est pas moi...
+Léonnie: Voyons, ne te froisse pas ! Dis moi simplement où les trouver.
+Fantôme: Elles sont allées vers la ville... Je n'ose aller voir...
+Léonnie: Mon dieu... Qu'ont-elles fait là bas... Que leur est-il arrivé ?!
+- Tomber dans les citrouilles
+- Aller voir en ville
 A suivre...
 do remove_char("fantome")
 - The end
