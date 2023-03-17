@@ -3,7 +3,7 @@
     <div class="occluder" :style="`opacity:${occluderOpacity}`" />
     <div class="dialogue-wrapper">
       <div class="character-name" v-if="characterName">{{ characterName }}</div>
-      <div class="dialogue">
+      <div class="dialogue" :class="{'narrator':isNarrator }">
         <p v-if="line">{{ currentDialogue }}</p>
       </div>
       <div class="response-wrapper" v-if="hasReponses">
@@ -134,6 +134,10 @@ const hasReponses = computed<boolean>(() => {
 
 const currentDialogue = computed<string | undefined>(() => {
   return line.value?.dialogue ?? undefined
+})
+
+const isNarrator = computed(()=>{
+  return !line.value?.character
 })
 
 async function nextDialogue(reponseNextId?: number) {

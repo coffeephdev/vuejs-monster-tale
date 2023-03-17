@@ -43,10 +43,17 @@ Léonnie: Quoi ?! Comment ça ? Mais où sont-elles allées ?
 Fantôme: C'est pas moi...
 Léonnie: Voyons, ne te froisse pas ! Dis moi simplement où les trouver.
 Fantôme: Elles sont allées vers la ville... Je n'ose aller voir...
+goto # 03 Destination
+
+# 03 Destination
 Léonnie: Mon dieu... Qu'ont-elles fait là bas... Que leur est-il arrivé ?!
 - Tomber dans les citrouilles
+	Allons Léonnie... Courage, ce n'est pas le moment de faillir !
+	goto # 03 Destination
 - Aller voir en ville
-A suivre...
-do remove_char("fantome")
-- The end
-	goto # END
+	do remove_char("fantome")
+	do change_backgrounds("")
+	goto # 04 Quiproquo
+	
+# 04 Quiproquo
+oh bah di dont les embrouillaminis
