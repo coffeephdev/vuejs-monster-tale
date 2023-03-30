@@ -10,27 +10,34 @@ Leonnie est en effet chargé de décorer la ville pour Halloween, avec ses sompt
 goto # 02 Waiting
 
 # 02 Waiting
-Mais rien ne presse ...
  if hasCheckCauldron == true
+	Peut-être qu'il faudrait y aller maintenant...
 	- Relire la recette
 		Léonnie: Je l'ai mise quelque part...
 		Léonnie n'est pas très organisée
-		Léonnie: Dis-donc ! Ca suffit ! Alors... La recette :
-		Léonnie: Un renard crevé sous les roues d'un carosse de Maraine la bonne fée. Un peu triste...
-		Léonnie: 3 tritons bien dodus en poudre. Cueillis moi-même !
+		Léonnie: Dis-donc ! Ca suffit ! Alors... 
+		Léonnie: La recette de ma fameuse potion revigorante pour citrouille !
+		Léonnie: Dans la famille, nous faisons reluire les citrouilles de mère en fille depuis des générations !
+		Léonnie: Pour qu'elles soient reluisantes et dodues, il nous faut :
+		Léonnie: Une peau de renard crevé sous les roues d'un carosse de Maraine-la-bonne-fée. Un peu triste. Au moins, c'est pas perdu...
+		Léonnie: ...Une fraise. J'aime les fraises. Et puis ça fait briller les cirtrouilles.
+		Léonnie: ...Un gros triton réduit en poudre. Cueilli moi-même !
+		Léonnie: ...et une queue de citrouille.
 		goto # 02 Waiting
-	- Aller voir les citrouilles
+	- Aller voir les citrouilles (pour de vrai)
  		goto # 03 Pumpkins
 if hasDrinkTea == true
+	Rien ne presse, donc...
 	- Vérifier le feu sous le chaudron
 		do toggle_state("hasCheckCauldron")
 		Léonnie: Non, c'est bon j'ai éteins le feu...
 		Léonnie est enthousiasmée, mais peut-être un peu nerveuse
 		Léonnie: Mais ?! Mais non, pas du tout !
 		goto # 02 Waiting
-	- Aller voir les citrouilles
+	- Aller voir les citrouilles...?
  		goto # 03 Pumpkins
 else
+	Mais rien ne presse...
 	- Boire une lampée 
 		do toggle_state("hasDrinkTea")
 		do spawn_item("tea 30 10 0.6")

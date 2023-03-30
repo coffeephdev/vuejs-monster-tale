@@ -94,6 +94,7 @@ const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value
       width: 5vw;
       position: absolute;
       right: 2vw;
+      transition: opacity background-color .3s;
       &:hover {
         background-color: var(--light);
         cursor: pointer;
@@ -107,7 +108,7 @@ const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value
     .response-wrapper {
       width: 80%;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
       flex-wrap: wrap;
       height: 7vw;
@@ -116,13 +117,15 @@ const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value
         font-family: var(--font-text);
         border: none;
         font-size: 1.8vw;
+        height: 3vw;
         width: max-content;
         text-align: center;
         cursor: pointer;
         background-color: var(--background);
         border-radius: 50vw;
         padding: 0 1.5vw;
-        margin-bottom: 0.4vw;
+        margin: 0.4vw;
+        margin-top: 0;
         &:hover {
           background-color: var(--light);
           position: relative;
