@@ -1,5 +1,6 @@
 body {
   --light: #5c547e;
+  --narrator: hsla(276, 100%, 85%, 0.87);
   --background-over: #2a253a;
   --background: #3e3561;
 }

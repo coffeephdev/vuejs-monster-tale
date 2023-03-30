@@ -79,7 +79,7 @@ const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value
       }
 
       &.narrator{
-        font-style: italic;
+        color: var(--narrator);
       }
     }
 
