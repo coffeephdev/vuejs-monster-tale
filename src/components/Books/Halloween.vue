@@ -10,7 +10,7 @@
         <button
           class="response"
           v-for="response in responses"
-          @click="nextDialogue(response.nextId)"
+          @click="e => nextDialogue(e, response.nextId)"
         >
           {{ response.prompt }}
         </button>
@@ -18,7 +18,7 @@
       <button
         class="next-dialogue-button"
         v-if="hasNextDialogue"
-        @click="nextDialogue()"
+        @click="e => nextDialogue(e)"
         :disabled="disableClick"
       >
         ☞
@@ -50,11 +50,18 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import DialogueManager from '@nathanhoad/saywhat'
 import DialogueResource from '@/assets/halloween/halloween.json'
 import { useBookStore } from './book-store'
+const store = useBookStore()
 
 const disableClick = ref(false)
 
 DialogueManager.gameStates = [
   {
+    hasDrinkTea:false,
+    hasCheckCauldron:false,
+
+    toggle_state(param:string) {
+      this[param] = !this[param]
+    },
     change_backgrounds(names: string) {
       occluderOpacity.value = 1
       setTimeout(() => {
@@ -81,7 +88,6 @@ DialogueManager.gameStates = [
   },
 ]
 
-const store = useBookStore()
 const dataPath = 'https://www.givr.fr/monster-tale-images/halloween'
 const line = ref()
 const audioClickFeedback = new Audio(`${dataPath}/audio/click.mp3`)
@@ -140,16 +146,20 @@ const isNarrator = computed(()=>{
   return !line.value?.character
 })
 
-async function nextDialogue(reponseNextId?: number) {
-  disableClick.value = true
-  audioClickFeedback.currentTime = 0
-  audioClickFeedback.play()
+async function nextDialogue(e:Event, reponseNextId?: number) {
   const next_id = reponseNextId ? reponseNextId : line.value.nextId
   line.value = await DialogueManager.getNextDialogueLine(next_id, DialogueResource)
 
-  setTimeout(() => {
-    disableClick.value = false
-  }, store.transitionDelay * 1000)
+  // Allow skip transition if user press ctrl
+  if(!e.ctrlKey){
+    disableClick.value = true
+    audioClickFeedback.currentTime = 0
+    audioClickFeedback.play()
+
+    setTimeout(() => {
+      disableClick.value = false
+    }, store.transitionDelay * 1000)
+  }
 }
 
 function getCharSrc(name: string) {

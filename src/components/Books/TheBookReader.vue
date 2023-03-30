@@ -50,6 +50,7 @@ const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
     color: white;
     z-index: 10;
 
@@ -74,8 +75,7 @@ const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value
 
       p {
         text-align: center;
-        margin: 1vw;
-        margin-top: 1.5vw;
+        margin: 0;
       }
 
       &.narrator{
@@ -105,10 +105,12 @@ const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value
     }
 
     .response-wrapper {
-      width: 100%;
+      width: 80%;
       display: flex;
       flex-direction: column;
       align-items: center;
+      flex-wrap: wrap;
+      height: 7vw;
 
       .response {
         font-family: var(--font-text);

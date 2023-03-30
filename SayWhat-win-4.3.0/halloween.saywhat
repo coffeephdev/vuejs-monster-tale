@@ -11,13 +11,34 @@ goto # 02 Waiting
 
 # 02 Waiting
 Mais rien ne presse ...
-- Boire une lampée
-	do spawn_item("tea 30 10 0.6")
-	Mmh, au bon goût de citrouille ! Sa tisane préférée.
-	do remove_item("tea")
-	goto # 02 Waiting
-- Aller voir les citrouilles
- 	goto # 03 Pumpkins
+ if hasCheckCauldron == true
+	- Relire la recette
+		Léonnie: Je l'ai mise quelque part...
+		Léonnie n'est pas très organisée
+		Léonnie: Dis-donc ! Ca suffit ! Alors... La recette :
+		Léonnie: Un renard crevé sous les roues d'un carosse de Maraine la bonne fée. Un peu triste...
+		Léonnie: 3 tritons bien dodus en poudre. Cueillis moi-même !
+		goto # 02 Waiting
+	- Aller voir les citrouilles
+ 		goto # 03 Pumpkins
+if hasDrinkTea == true
+	- Vérifier le feu sous le chaudron
+		do toggle_state("hasCheckCauldron")
+		Léonnie: Non, c'est bon j'ai éteins le feu...
+		Léonnie est enthousiasmée, mais peut-être un peu nerveuse
+		Léonnie: Mais ?! Mais non, pas du tout !
+		goto # 02 Waiting
+	- Aller voir les citrouilles
+ 		goto # 03 Pumpkins
+else
+	- Boire une lampée 
+		do toggle_state("hasDrinkTea")
+		do spawn_item("tea 30 10 0.6")
+		Mmh, au bon goût de citrouille ! Sa tisane préférée.
+		do remove_item("tea")
+		goto # 02 Waiting
+	- Aller voir les citrouilles
+ 		goto # 03 Pumpkins
 
 # 03 Pumpkins
 do change_backgrounds("champ")
