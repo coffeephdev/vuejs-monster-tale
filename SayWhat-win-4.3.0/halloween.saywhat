@@ -13,11 +13,12 @@ goto # 02 Waiting
  if hasCheckCauldron == true
 	Peut-être qu'il faudrait y aller maintenant...
 	- Relire la recette
+		do toggle_state("hasReadRecipy")
 		Léonnie: Je l'ai mise quelque part...
 		Léonnie n'est pas très organisée
 		Léonnie: Dis-donc ! Ca suffit ! Alors... 
 		Léonnie: La recette de ma fameuse potion revigorante pour citrouille !
-		Léonnie: Dans la famille, nous faisons reluire les citrouilles de mère en fille depuis des générations !
+		Léonnie: Dans la famille, nous faisons briller les citrouilles de mère en fille depuis des générations !
 		Léonnie: Pour qu'elles soient reluisantes et dodues, il nous faut :
 		Léonnie: Une peau de renard crevé sous les roues d'un carosse de Maraine-la-bonne-fée. Un peu triste. Au moins, c'est pas perdu...
 		Léonnie: ...Une fraise. J'aime les fraises. Et puis ça fait briller les cirtrouilles.
@@ -33,6 +34,7 @@ if hasDrinkTea == true
 		Léonnie: Non, c'est bon j'ai éteins le feu...
 		Léonnie est enthousiasmée, mais peut-être un peu nerveuse
 		Léonnie: Mais ?! Mais non, pas du tout !
+		Léonnie: Peut-être un peu...
 		goto # 02 Waiting
 	- Aller voir les citrouilles...?
  		goto # 03 Pumpkins
@@ -42,6 +44,7 @@ else
 		do toggle_state("hasDrinkTea")
 		do spawn_item("tea 30 10 0.6")
 		Mmh, au bon goût de citrouille ! Sa tisane préférée.
+		Cultivée à l'aide de la potion familiale, le goût est plus intense !
 		do remove_item("tea")
 		goto # 02 Waiting
 	- Aller voir les citrouilles
@@ -49,13 +52,14 @@ else
 
 # 03 Pumpkins
 do change_backgrounds("champ")
-Mais ?! Où sont elles passées, ce n'est pas possible ! Plus une courge à l'horizon !
+Mais ?! Où sont elles passées ?!
+Plus une courge à l'horizon !
 Léonnie: Ce n'est pas possible ?! Halloween est demain !
 Léonnie:  Comment vais-je faire ?!
 do spawn_char("fantome 30 20 0.4")
 Fantôme: Oh là là...
 Léonnie: Fantôme, c'est toi ? Je t'en prie, as-tu vu quelque chose ?
-Fantôme: Oh... On est dans de beaux draps...
+Fantôme: Oh... Oh... On est dans de beaux draps...
 do remove_char("fantome")
 Léonnie: Enfin, ce n'est pas le moment de me laisser tomber, reviens !
 do spawn_char("fantome 45 10 0.6")
@@ -69,16 +73,30 @@ Fantôme: Très bien, très bien ! Ecoute, ça va te paraitre bizarre...
 Fantôme: Ne te froisse pas... C'est comme si tes citrouilles avaient pris vie, et s'étaient enfuies !
 Léonnie: Quoi ?! Comment ça ? Mais où sont-elles allées ?
 Fantôme: C'est pas moi...
+do remove_char("fantome")
 Léonnie: Voyons, ne te froisse pas ! Dis moi simplement où les trouver.
+do spawn_char("fantome 35 20 0.70")
 Fantôme: Elles sont allées vers la ville... Je n'ose aller voir...
-goto # 03 Destination
+Léonnie: Mais qu'est-ce qui cloche à la fin ?
+goto # 2.5 Reflexion
 
-# 03 Destination
+# 2.5 Reflexion
+Léonnie: Ca ne peut pas être ma potion, je la concocte chaque année...
+- Réfléchir très fort [if hasDrinkTea]
+	Léonnie: Mmh... C'est vrai que la tisane avait un arrière-goût...
+	Léonnie: C'était donc ça, le goût intense ? Je me demande...
+	Tout à ses réflexions, Léonnie se met en route en direction de Toussaint-Sainte-Peur.
+	goto # 03 Carrefour 
+- Aller voir en ville
+En proie au doute sur ses compétences, Léonnie file en direction de Toussaint-Sainte-Peur.
+goto # 03 Carrefour 
+
+# 03 Carrefour
 Léonnie: Mon dieu... Qu'ont-elles fait là bas... Que leur est-il arrivé ?!
 - Tomber dans les citrouilles
 	Allons Léonnie... Courage, ce n'est pas le moment de faillir !
-	goto # 03 Destination
-- Aller voir en ville
+	goto # 03 Carrefour
+- Continuer vers la ville
 	do remove_char("fantome")
 	do change_backgrounds("")
 	goto # 04 Quiproquo

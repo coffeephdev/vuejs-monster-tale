@@ -3,14 +3,14 @@
     <div class="occluder" :style="`opacity:${occluderOpacity}`" />
     <div class="dialogue-wrapper">
       <div class="character-name" v-if="characterName">{{ characterName }}</div>
-      <div class="dialogue" :class="{'narrator':isNarrator }">
+      <div class="dialogue" :class="{ narrator: isNarrator }">
         <p v-if="line">{{ currentDialogue }}</p>
       </div>
       <div class="response-wrapper" v-if="hasReponses">
         <button
           class="response"
           v-for="response in responses"
-          @click="e => nextDialogue(e, response.nextId)"
+          @click="(e) => nextDialogue(e, response.nextId)"
         >
           {{ response.prompt }}
         </button>
@@ -18,7 +18,7 @@
       <button
         class="next-dialogue-button"
         v-if="hasNextDialogue"
-        @click="e => nextDialogue(e)"
+        @click="(e) => nextDialogue(e)"
         :disabled="disableClick"
       >
         ☞
@@ -30,7 +30,7 @@
         class="character-gif"
         :src="getItemSrc(item.name)"
         :style="getStoryItemStyle(item)"
-        alt="Character"
+        :alt="item.name"
       />
     </template>
     <template v-for="char in store.chars">
@@ -39,7 +39,7 @@
         class="character-gif"
         :src="getCharSrc(char.name)"
         :style="getStoryItemStyle(char)"
-        alt="Character"
+        :alt="char.name + 'Character'"
       />
     </template>
   </div>
@@ -56,10 +56,11 @@ const disableClick = ref(false)
 
 DialogueManager.gameStates = [
   {
-    hasDrinkTea:false,
-    hasCheckCauldron:false,
+    hasDrinkTea: false,
+    hasCheckCauldron: false,
+    hasReadRecipy: false,
 
-    toggle_state(param:string) {
+    toggle_state(param: string) {
       this[param] = !this[param]
     },
     change_backgrounds(names: string) {
@@ -142,16 +143,16 @@ const currentDialogue = computed<string | undefined>(() => {
   return line.value?.dialogue ?? undefined
 })
 
-const isNarrator = computed(()=>{
+const isNarrator = computed(() => {
   return !line.value?.character
 })
 
-async function nextDialogue(e:Event, reponseNextId?: number) {
+async function nextDialogue(e: Event, reponseNextId?: number) {
   const next_id = reponseNextId ? reponseNextId : line.value.nextId
   line.value = await DialogueManager.getNextDialogueLine(next_id, DialogueResource)
 
   // Allow skip transition if user press ctrl
-  if(!e.ctrlKey){
+  if (!e.ctrlKey) {
     disableClick.value = true
     audioClickFeedback.currentTime = 0
     audioClickFeedback.play()
