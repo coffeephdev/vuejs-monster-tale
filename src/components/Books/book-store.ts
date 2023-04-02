@@ -42,12 +42,19 @@ export const useBookStore = defineStore('book', () => {
     if (currentDialogue.value == null) return
 
     const initialDialogue = currentDialogue.value
-    remplacer tout par des espaces
-    for (var char of initialDialogue) {
-      remplacer chaque espace par le char d'origine
-      marquer une pause
+    currentDialogue.value = ''
+    let indice = 0
+    let feedWord: undefined | number
+    if (!feedWord) {
+      feedWord = setInterval(() => {
+        currentDialogue.value += initialDialogue[indice]
+        indice = indice + 1
+
+        if (indice >= initialDialogue.length) {
+          clearInterval(feedWord)
+        }
+      }, 10)
     }
-    currentDialogue.value = currentDialogue.value
   }
 
   return {
