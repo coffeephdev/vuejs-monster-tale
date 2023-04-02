@@ -7,6 +7,7 @@ export const useBookStore = defineStore('book', () => {
   const backgrounds = ref(['intro'])
   const transitionDelay = 0.5
   const audioVolume = 0.07
+  const currentDialogue = ref<null | string>(null)
 
   function Spawn(param: string, pool: (StoryItem | undefined)[]) {
     const args = param.split(' ')
@@ -37,5 +38,27 @@ export const useBookStore = defineStore('book', () => {
     }
   }
 
-  return { backgrounds, Spawn, Unspawn, chars, items, transitionDelay, audioVolume }
+  function printDialogue() {
+    if (currentDialogue.value == null) return
+
+    const initialDialogue = currentDialogue.value
+    remplacer tout par des espaces
+    for (var char of initialDialogue) {
+      remplacer chaque espace par le char d'origine
+      marquer une pause
+    }
+    currentDialogue.value = currentDialogue.value
+  }
+
+  return {
+    currentDialogue,
+    backgrounds,
+    Spawn,
+    Unspawn,
+    printDialogue,
+    chars,
+    items,
+    transitionDelay,
+    audioVolume,
+  }
 })

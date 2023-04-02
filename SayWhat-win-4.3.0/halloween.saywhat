@@ -32,9 +32,9 @@ if hasDrinkTea == true
 	- Vérifier le feu sous le chaudron
 		do toggle_state("hasCheckCauldron")
 		Léonnie: Non, c'est bon j'ai éteins le feu...
+		Léonnie: Tiens, j'ai renversé un pot ?
 		Léonnie est enthousiasmée, mais peut-être un peu nerveuse
 		Léonnie: Mais ?! Mais non, pas du tout !
-		Léonnie: Peut-être un peu...
 		goto # 02 Waiting
 	- Aller voir les citrouilles...?
  		goto # 03 Pumpkins
@@ -65,12 +65,12 @@ Léonnie: Enfin, ce n'est pas le moment de me laisser tomber, reviens !
 do spawn_char("fantome 45 10 0.6")
 Fantôme: Je... J'ai vu... Enfin... Il faisait nuit...
 Léonnie: (Un jour, j'en ferais ma taie d'oreiller...)
-Léonnie: Si je ne trouve pas de solution, je devrais me trouver un nouvel endroit pour vivre !
+Léonnie: Si je ne trouve pas de solution, je devrais me trouver un nouvel endroit où vivre !
 Léonnie: Ce jour là, Fantôme, tu pourras dire adieu à l'adoucissant !
 do remove_char("fantome")
 do spawn_char("fantome 35 20 0.70")
 Fantôme: Très bien, très bien ! Ecoute, ça va te paraitre bizarre...
-Fantôme: Ne te froisse pas... C'est comme si tes citrouilles avaient pris vie, et s'étaient enfuies !
+Fantôme: C'est comme si tes citrouilles avaient pris vie, et s'étaient enfuies !
 Léonnie: Quoi ?! Comment ça ? Mais où sont-elles allées ?
 Fantôme: C'est pas moi...
 do remove_char("fantome")

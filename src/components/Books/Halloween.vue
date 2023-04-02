@@ -4,7 +4,7 @@
     <div class="dialogue-wrapper">
       <div class="character-name" v-if="characterName">{{ characterName }}</div>
       <div class="dialogue" :class="{ narrator: isNarrator }">
-        <p v-if="line">{{ currentDialogue }}</p>
+        <p v-if="line">{{ store.currentDialogue }}</p>
       </div>
       <div class="response-wrapper" v-if="hasReponses">
         <button
@@ -112,6 +112,9 @@ onMounted(async () => {
     DialogueResource.titles['01 Start'],
     DialogueResource
   )
+  store.currentDialogue = line.value?.dialogue ?? null
+  store.printDialogue()
+
   Array.of(audioBackground, audioClickFeedback).forEach(
     (audio) => (audio.volume = store.audioVolume)
   )
@@ -139,10 +142,6 @@ const hasReponses = computed<boolean>(() => {
   return line.value?.responses.length != 0 ?? false
 })
 
-const currentDialogue = computed<string | undefined>(() => {
-  return line.value?.dialogue ?? undefined
-})
-
 const isNarrator = computed(() => {
   return !line.value?.character
 })
@@ -150,6 +149,8 @@ const isNarrator = computed(() => {
 async function nextDialogue(e: Event, reponseNextId?: number) {
   const next_id = reponseNextId ? reponseNextId : line.value.nextId
   line.value = await DialogueManager.getNextDialogueLine(next_id, DialogueResource)
+  store.currentDialogue = line.value?.dialogue ?? null
+  store.printDialogue()
 
   // Allow skip transition if user press ctrl
   if (!e.ctrlKey) {
