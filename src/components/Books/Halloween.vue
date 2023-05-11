@@ -4,7 +4,7 @@
     <div class="dialogue-wrapper">
       <div class="character-name" v-if="characterName">{{ characterName }}</div>
       <div class="dialogue" :class="{ narrator: isNarrator }">
-        <p v-if="line">{{ store.currentDialogue }}</p>
+        <p v-if="line">{{ `${store.currentDialogue}` }}</p>
       </div>
       <div class="response-wrapper" v-if="hasReponses">
         <button

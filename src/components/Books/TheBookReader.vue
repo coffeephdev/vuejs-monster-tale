@@ -74,7 +74,7 @@ const Book = defineAsyncComponent(() => import(`../Books/${capitalizedBook.value
       justify-content: center;
 
       p {
-        text-align: center;
+        text-align:left;
         margin: 0;
       }
 
