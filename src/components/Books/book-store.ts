@@ -42,12 +42,12 @@ export const useBookStore = defineStore('book', () => {
     if (currentDialogue.value == null) return
 
     const initialDialogue = currentDialogue.value
-    currentDialogue.value = ''.repeat(initialDialogue.length)
+    currentDialogue.value = ' '.repeat(initialDialogue.length)
     let indice = 0
     let feedWord: undefined | number
     if (!feedWord) {
       feedWord = setInterval(() => {
-        setCharAt(currentDialogue.value!, indice, initialDialogue[indice])
+        currentDialogue.value = setCharAt(currentDialogue.value, indice, initialDialogue[indice])
         indice = indice + 1
 
         if (indice >= initialDialogue.length) {
