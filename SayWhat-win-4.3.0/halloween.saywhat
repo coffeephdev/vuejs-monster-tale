@@ -79,28 +79,3 @@ do spawn_char("fantome 35 20 0.70")
 Fantôme: Elles sont allées vers la ville... Je n'ose aller voir...
 Léonnie: Mais qu'est-ce qui cloche à la fin ?
 goto # 2.5 Reflexion
-
-# 2.5 Reflexion
-Léonnie: Ca ne peut pas être ma potion, je la concocte chaque année...
-- Réfléchir très fort [if hasDrinkTea]
-	Léonnie: Mmh... C'est vrai que la tisane avait un arrière-goût...
-	Léonnie: C'était donc ça, le goût intense ? Je me demande...
-	Tout à ses réflexions, Léonnie se met en route en direction de Toussaint-Sainte-Peur.
-	goto # 03 Carrefour 
-- Aller voir en ville
-En proie au doute sur ses compétences, Léonnie file en direction de Toussaint-Sainte-Peur.
-goto # 03 Carrefour 
-
-# 03 Carrefour
-Léonnie: Mon dieu... Qu'ont-elles fait là bas... Que leur est-il arrivé ?!
-- Tomber dans les citrouilles
-	Allons Léonnie... Courage, ce n'est pas le moment de faillir !
-	goto # 03 Carrefour
-- Continuer vers la ville
-	do remove_char("fantome")
-	do change_backgrounds("")
-	goto # 04 Quiproquo
-	
-# 04 Quiproquo
-Alors qu'elle arrive en ville, deux silhouettes sont plongées en pleine discussion...
-Léonnie: 

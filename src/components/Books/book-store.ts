@@ -42,25 +42,29 @@ export const useBookStore = defineStore('book', () => {
     if (currentDialogue.value == null) return
 
     const initialDialogue = currentDialogue.value
+    // virer ça et append les char plutôt
     currentDialogue.value = ' '.repeat(initialDialogue.length)
     let indice = 0
     let feedWord: undefined | number
     if (!feedWord) {
       feedWord = setInterval(() => {
-        currentDialogue.value = setCharAt(currentDialogue.value, indice, initialDialogue[indice])
-        indice = indice + 1
+        // 3 par 3 pour fluidifier le spawn de char
+        for (let k = 3; k > 0; k--) {
+          currentDialogue.value = setCharAt(currentDialogue.value, indice, initialDialogue[indice])
+          indice = indice + 1
+        }
 
         if (indice >= initialDialogue.length) {
           clearInterval(feedWord)
         }
-      }, 10)
+      }, 15)
     }
   }
 
-  function setCharAt(str:string,index:number,chr:string) {
-    if(index > str.length-1) return str;
-    return str.substring(0,index) + chr + str.substring(index+1);
-}
+  function setCharAt(str: string, index: number, chr: string) {
+    if (index > str.length - 1) return str
+    return str.substring(0, index) + chr + str.substring(index + 1)
+  }
 
   return {
     currentDialogue,
