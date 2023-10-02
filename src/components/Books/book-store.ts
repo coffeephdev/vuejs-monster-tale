@@ -39,7 +39,10 @@ export const useBookStore = defineStore('book', () => {
   }
 
   function printDialogue() {
-    if (currentDialogue.value == null) return
+    if (currentDialogue.value == null) {
+      currentDialogue.value = ''
+      return
+    }
 
     const initialDialogue = currentDialogue.value
     // virer ça et append les char plutôt
