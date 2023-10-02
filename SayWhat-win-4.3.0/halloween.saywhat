@@ -10,45 +10,26 @@ Leonnie est en effet chargé de décorer la ville pour Halloween, avec ses sompt
 goto # 02 Waiting
 
 # 02 Waiting
- if hasCheckCauldron == true
-	Peut-être qu'il faudrait y aller maintenant...
-	- Relire la recette
-		do toggle_state("hasReadRecipy")
-		Léonnie: Je l'ai mise quelque part...
-		Léonnie n'est pas très organisée
-		Léonnie: Dis-donc ! Ca suffit ! Alors... 
-		Léonnie: La recette de ma fameuse potion revigorante pour citrouille !
-		Léonnie: Dans la famille, nous faisons briller les citrouilles de mère en fille depuis des générations !
-		Léonnie: Pour qu'elles soient reluisantes et dodues, il nous faut :
-		Léonnie: Une peau de renard crevé sous les roues d'un carosse de Maraine-la-bonne-fée. Un peu triste. Au moins, c'est pas perdu...
-		Léonnie: ...Une fraise. J'aime les fraises. Et puis ça fait briller les cirtrouilles.
-		Léonnie: ...Un gros triton réduit en poudre. Cueilli moi-même !
-		Léonnie: ...et une queue de citrouille.
-		goto # 02 Waiting
-	- Aller voir les citrouilles (pour de vrai)
- 		goto # 03 Pumpkins
-if hasDrinkTea == true
-	Rien ne presse, donc...
-	- Vérifier le feu sous le chaudron
-		do toggle_state("hasCheckCauldron")
-		Léonnie: Non, c'est bon j'ai éteins le feu...
-		Léonnie: Tiens, j'ai renversé un pot ?
-		Léonnie est enthousiasmée, mais peut-être un peu nerveuse
-		Léonnie: Mais ?! Mais non, pas du tout !
-		goto # 02 Waiting
-	- Aller voir les citrouilles...?
- 		goto # 03 Pumpkins
-else
+if hasDrinkTea == false
 	Mais rien ne presse...
-	- Boire une lampée 
-		do toggle_state("hasDrinkTea")
-		do spawn_item("tea 30 10 0.6")
-		Mmh, au bon goût de citrouille ! Sa tisane préférée.
-		Cultivée à l'aide de la potion familiale, le goût est plus intense !
+else
+	Rien ne presse, donc...
+- Boire une lampée 
+	do spawn_item("tea 30 10 0.6")
+	if hasDrinkTea
+		Décidément, c'est si bon...!
 		do remove_item("tea")
-		goto # 02 Waiting
-	- Aller voir les citrouilles
- 		goto # 03 Pumpkins
+		Bon, il faut y aller maintenant !
+		- Aller voir les citrouilles
+		goto # 03 Pumpkins
+	Mmh, au bon goût de citrouille ! Sa tisane préférée.
+	Cultivée à l'aide de la potion familiale, le goût est plus intense !
+	do remove_item("tea")
+	do toggle_state("hasDrinkTea")
+	
+	goto # 02 Waiting
+- Aller voir les citrouilles
+goto # 03 Pumpkins
 
 # 03 Pumpkins
 do change_backgrounds("champ")
@@ -78,4 +59,3 @@ Léonnie: Voyons, ne te froisse pas ! Dis moi simplement où les trouver.
 do spawn_char("fantome 35 20 0.70")
 Fantôme: Elles sont allées vers la ville... Je n'ose aller voir...
 Léonnie: Mais qu'est-ce qui cloche à la fin ?
-goto # 2.5 Reflexion
