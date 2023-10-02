@@ -57,12 +57,13 @@ const disableClick = ref(false)
 DialogueManager.gameStates = [
   {
     hasDrinkTea: false,
-    hasCheckCauldron: false,
-    hasReadRecipy: false,
+    hasMaireIndice: false,
+    hasVampireIndice: false,
 
     toggle_state(param: string) {
       this[param] = !this[param]
     },
+
     change_backgrounds(names: string) {
       occluderOpacity.value = 1
       setTimeout(() => {

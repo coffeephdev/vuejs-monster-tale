@@ -16,17 +16,18 @@ else
 	Rien ne presse, donc...
 - Boire une lampée 
 	do spawn_item("tea 30 10 0.6")
+	
 	if hasDrinkTea
 		Décidément, c'est si bon...!
 		do remove_item("tea")
 		Bon, il faut y aller maintenant !
 		- Aller voir les citrouilles
 		goto # 03 Pumpkins
+		
 	Mmh, au bon goût de citrouille ! Sa tisane préférée.
 	Cultivée à l'aide de la potion familiale, le goût est plus intense !
 	do remove_item("tea")
 	do toggle_state("hasDrinkTea")
-	
 	goto # 02 Waiting
 - Aller voir les citrouilles
 goto # 03 Pumpkins
@@ -40,7 +41,8 @@ Léonnie:  Comment vais-je faire ?!
 do spawn_char("fantome 30 20 0.4")
 Fantôme: Oh là là...
 Léonnie: Fantôme, c'est toi ? Je t'en prie, as-tu vu quelque chose ?
-Fantôme: Oh... Oh... On est dans de beaux draps...
+Fantôme: Je... Je crois avoir...
+Fantôme: Ah je ne sais plus!... Ma mémoire, elle disparait...
 do remove_char("fantome")
 Léonnie: Enfin, ce n'est pas le moment de me laisser tomber, reviens !
 do spawn_char("fantome 45 10 0.6")
@@ -50,12 +52,82 @@ Léonnie: Si je ne trouve pas de solution, je devrais me trouver un nouvel endro
 Léonnie: Ce jour là, Fantôme, tu pourras dire adieu à l'adoucissant !
 do remove_char("fantome")
 do spawn_char("fantome 35 20 0.70")
-Fantôme: Très bien, très bien ! Ecoute, ça va te paraitre bizarre...
+Fantôme: Très bien, très bien ! Tout ce dont je me rappelle...
 Fantôme: C'est comme si tes citrouilles avaient pris vie, et s'étaient enfuies !
 Léonnie: Quoi ?! Comment ça ? Mais où sont-elles allées ?
 Fantôme: C'est pas moi...
 do remove_char("fantome")
 Léonnie: Voyons, ne te froisse pas ! Dis moi simplement où les trouver.
 do spawn_char("fantome 35 20 0.70")
-Fantôme: Elles sont allées vers la ville... Je n'ose aller voir...
-Léonnie: Mais qu'est-ce qui cloche à la fin ?
+Fantôme: Elles sont allées vers la ville... Il me semble ?
+Fantôme: J'aimerais t'aider plus, je te jure ! Seulement ma mémoire...
+do remove_char("fantome")
+Fantôme: C'est comme si elle s'effaçait
+Léonnie: Nous voilà dans de beaux draps... Mais qu'est-ce qui cloche à la fin ?
+Léonnie, furibonde, part d'un pas décidé vers la ville pour tirer cette affaire au clair
+- Aller voir en ville
+	goto # 04 City
+
+# 04 City
+do change_backgrounds("ville")
+Devant Léonnie se dresse une petite apocalypse
+Léonnie: Oh là là... Le Fantôme ne mentait pas
+[Choix d'aller voir vampire ou maire]
+- Aller voir le Maire
+	goto # 05 Maire
+- Aller voir Vampire
+	goto # 05 Vampire
+
+# 05 Maire
+do change_backgrounds("ville")
+do spawn_char("maire 40 20 0.7")
+if hasMaireIndice == false
+	- Apprendre indice Maire
+		do toggle_state("hasMaireIndice")
+		do remove_char("maire")
+		goto # 05 Maire
+else
+	Maire: J'ai déjà tout dit ptn...
+- Retourner voir Fantôme
+	do remove_char("maire")
+	goto # 05 Fantome
+- Aller voir Vampire
+	do remove_char("maire")
+	goto # 05 Vampire
+	
+# 05 Vampire
+do change_backgrounds("ville")
+do spawn_char("vampire 40 20 0.7")
+if hasVampireIndice == false
+	- Apprendre indice Vampire
+		do toggle_state("hasVampireIndice")
+		do remove_char("vampire")
+		goto # 05 Vampire
+else
+	Vampire: J'ai déjà tout dit ptn...
+- Retourner voir Fantôme
+	do remove_char("vampire")
+	goto # 05 Fantome
+- Aller voir Maire
+	do remove_char("vampire")
+	goto # 05 Maire
+
+# 05 Fantome
+do change_backgrounds("champ")
+do spawn_char("fantome 30 20 0.6")
+Fantôme: "Bouh !" mdr.
+Léonnie: ptn t con c abusé
+- Go boire la popo
+	do remove_char("fantome")
+	goto # 06 Choix Potion
+
+# 06 Choix Potion
+do change_backgrounds("attaque-ville")
+miam miam la popo 2 rockent
+- Go combat finalent
+	goto # 07 Combat Final Rock
+
+# 07 Combat Final Rock
+do change_backgrounds("leonnie-rap-ending")
+mdr gg
+
