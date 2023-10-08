@@ -63,6 +63,7 @@ DialogueManager.gameStates = [
 
     toggle_state(param: string) {
       this[param] = !this[param]
+      console.log('toggle', param)
     },
 
     change_backgrounds(names: string) {
