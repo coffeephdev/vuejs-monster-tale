@@ -21,7 +21,7 @@ else
 	Mmh, au bon goût de citrouille ! Sa tisane préférée.
 	Cultivée à l'aide de la potion familiale, le goût est plus intense !
 	do remove_item("tea")
-	do toggle_state ("hasDrinkTea")
+	do toggle_state("hasDrinkTea")
 	goto # 02 Waiting
 - Aller voir les citrouilles
 goto # 03 Pumpkins
@@ -76,7 +76,7 @@ Léonnie: Nous voilà dans de beaux draps... Mais qu'est-ce qui cloche à la fin
 	Léonnie: Le chaudron est telle que je l'ai laissé.
 	Léonnie: Peut-être que cela vient d'ailleurs ?
 	- Inspecter le sol
-		do toggle_state ("foundGarlic")
+		do toggle_state("foundGarlic")
 		Léonnie: Mais, il y a une étiquette, là !
 		Sur l'étiquette, est écrit "Ail"...
 		Léonnie: Quelqu'un a imité mon écriture ? Ca veut dire que j'ai échangé un des ingrédients !
@@ -85,7 +85,7 @@ Léonnie: Nous voilà dans de beaux draps... Mais qu'est-ce qui cloche à la fin
 		Léonnie: Je ne sais pas qui m'a joué ce tour, mais il va voir de quoi se chauffe une sorcière !
 		goto # 04 City
 	- Inspecter l'étagère
-		do toggle_state ("foundGarlic")
+		do toggle_state("foundGarlic")
 		Tous les ingrédients semblent impecablement rangés sur l'étagère.
 		Léonnie: Tous... Sauf ce pot !
 		Léonnie: Il n'est pas rangé à sa place. De l'oignon en poudre ?
@@ -118,7 +118,7 @@ do change_backgrounds("ville")
 do spawn_char("maire 40 20 0.7")
 if hasMaireIndice == false
 	- Apprendre indice Maire
-		do toggle_state ("hasMaireIndice")
+		do toggle_state("hasMaireIndice")
 		do remove_char("maire")
 		goto # 05 Maire
 else
@@ -135,7 +135,7 @@ do change_backgrounds("ville")
 do spawn_char("vampire 40 20 0.7")
 if hasVampireIndice == false
 	- Apprendre indice Vampire
-		do toggle_state ("hasVampireIndice")
+		do toggle_state("hasVampireIndice")
 		do remove_char("vampire")
 		goto # 05 Vampire
 else
