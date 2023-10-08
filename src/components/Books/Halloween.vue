@@ -59,6 +59,7 @@ DialogueManager.gameStates = [
     hasDrinkTea: false,
     hasMaireIndice: false,
     hasVampireIndice: false,
+    foundGarlic: false,
 
     toggle_state(param: string) {
       this[param] = !this[param]
