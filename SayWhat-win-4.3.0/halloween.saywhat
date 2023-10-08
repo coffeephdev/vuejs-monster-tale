@@ -14,20 +14,14 @@ if hasDrinkTea == false
 	Mais rien ne presse...
 else
 	Rien ne presse, donc...
+	- Aller voir les citrouilles
+	goto # 03 Pumpkins
 - Boire une lampée 
 	do spawn_item("tea 30 10 0.6")
-	
-	if hasDrinkTea
-		Décidément, c'est si bon...!
-		do remove_item("tea")
-		Bon, il faut y aller maintenant !
-		- Aller voir les citrouilles
-		goto # 03 Pumpkins
-		
 	Mmh, au bon goût de citrouille ! Sa tisane préférée.
 	Cultivée à l'aide de la potion familiale, le goût est plus intense !
 	do remove_item("tea")
-	do toggle_state("hasDrinkTea")
+	do toggle_state ("hasDrinkTea")
 	goto # 02 Waiting
 - Aller voir les citrouilles
 goto # 03 Pumpkins
@@ -47,7 +41,7 @@ do remove_char("fantome")
 Léonnie: Enfin, ce n'est pas le moment de me laisser tomber, reviens !
 do spawn_char("fantome 45 10 0.6")
 Fantôme: Je... J'ai vu... Enfin... Il faisait nuit...
-Léonnie: (Un jour, j'en ferais ma taie d'oreiller...)
+Léonnie: (Un jour, j'en ferais ma taie d'oreiller)
 Léonnie: Si je ne trouve pas de solution, je devrais me trouver un nouvel endroit où vivre !
 Léonnie: Ce jour là, Fantôme, tu pourras dire adieu à l'adoucissant !
 do remove_char("fantome")
@@ -62,17 +56,58 @@ do spawn_char("fantome 35 20 0.70")
 Fantôme: Elles sont allées vers la ville... Il me semble ?
 Fantôme: J'aimerais t'aider plus, je te jure ! Seulement ma mémoire...
 do remove_char("fantome")
-Fantôme: C'est comme si elle s'effaçait
+Fantôme: C'est comme si elle s'effaçait.
 Léonnie: Nous voilà dans de beaux draps... Mais qu'est-ce qui cloche à la fin ?
-Léonnie, furibonde, part d'un pas décidé vers la ville pour tirer cette affaire au clair
+- Inspecter le champ
+	Léonnie: Peut-être qu'il reste quelque chose sur place qui pourrait m'éclairer !
+	Léonnie: Certaines citrouilles n'ont pas bougé... Ca me fera des graines et de la tisane, au moins !
+	Léonnie: Tiens, c'est bizarre...
+	Une citrouille semblant s'être déplacée, n'est cependant pas arrivée en ville.
+	Dégagée de ses racines, elle a l'air d'avoir mordu un...
+	Léonnie: ...mouchoir ? Mais qu'est-ce qu'un mouchoir fait ici ?!
+	Léonnie: Il est brodé, mais je ne reconnais pas la signature.
+	Léonnie: Brave citrouille, tu as voulu défendre le champ ? Quelle mauvaise graine a piqué les autres...
+	Léonnie: Allons voir ça de plus près !
+	goto # 04 City
+- Inspecter le chaudron
+	Il ne semble pas à Léonnie avoir raté la recette mais...
+	Léonnie: Mieux vaut vérifier deux fois, pas vrai ?
+	do change_backgrounds("salon")
+	Léonnie: Le chaudron est telle que je l'ai laissé.
+	Léonnie: Peut-être que cela vient d'ailleurs ?
+	- Inspecter le sol
+		do toggle_state ("foundGarlic")
+		Léonnie: Mais, il y a une étiquette, là !
+		Sur l'étiquette, est écrit "Ail"...
+		Léonnie: Quelqu'un a imité mon écriture ? Ca veut dire que j'ai échangé un des ingrédients !
+		Léonnie: J'imagine que j'ai du mettre autre chose à la place de l'ail.
+		Léonnie: Les citrouilles n'ont pas apprécié ! Quel cauchemar, et Halloween qui approche.
+		Léonnie: Je ne sais pas qui m'a joué ce tour, mais il va voir de quoi se chauffe une sorcière !
+		goto # 04 City
+	- Inspecter l'étagère
+		do toggle_state ("foundGarlic")
+		Tous les ingrédients semblent impecablement rangés sur l'étagère.
+		Léonnie: Tous... Sauf ce pot !
+		Léonnie: Il n'est pas rangé à sa place. De l'oignon en poudre ?
+		Léonnie: Je n'en ai pas besoin pour la recette. Il était à la place de...
+		Léonnie: Mais où est l'ail semoule ?!
+		Léonnie: Je vois. Quelqu'un a décidé de jouer avec moi. Voyons comment lui renvoyer l'ascenseur !
+		goto # 04 City
 - Aller voir en ville
+	Léonnie, furibonde, part d'un pas décidé vers la ville pour tirer cette affaire au clair.
 	goto # 04 City
 
 # 04 City
 do change_backgrounds("ville")
-Devant Léonnie se dresse une petite apocalypse
-Léonnie: Oh là là... Le Fantôme ne mentait pas
-[Choix d'aller voir vampire ou maire]
+Devant Léonnie se dresse une petite apocalypse.
+Des citrouilles partout ! Dans la rue, par les fenêtres...
+Les cucurbitacés semble s'être répamdus dans toute la ville !
+Léonnie: Oh là là... Le Fantôme ne mentait pas !
+Léonnie: Je peux choisir d'hyperventiler, ou bien réfléchir au problème...
+Léonnie: Pourquoi pas les deux à la fois ? Non, voyons, respirons un bon coup.
+Léonnie: Fantôme a dit qu'il avait du mal à se souvenir de quelque chose.
+Léonnie: Donc, on sait qu'il s'est passé quelque chose !
+Léonnie: Je connais deux zigotos qui auraient probablement des réponses.
 - Aller voir le Maire
 	goto # 05 Maire
 - Aller voir Vampire
@@ -83,7 +118,7 @@ do change_backgrounds("ville")
 do spawn_char("maire 40 20 0.7")
 if hasMaireIndice == false
 	- Apprendre indice Maire
-		do toggle_state("hasMaireIndice")
+		do toggle_state ("hasMaireIndice")
 		do remove_char("maire")
 		goto # 05 Maire
 else
@@ -100,7 +135,7 @@ do change_backgrounds("ville")
 do spawn_char("vampire 40 20 0.7")
 if hasVampireIndice == false
 	- Apprendre indice Vampire
-		do toggle_state("hasVampireIndice")
+		do toggle_state ("hasVampireIndice")
 		do remove_char("vampire")
 		goto # 05 Vampire
 else
