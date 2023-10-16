@@ -1,3 +1,4 @@
+
 # 01 Start
 Léonnie la sorcière vit paisiblement dans la petite ville de Toussaint-Sainte-Peur.
 Sa spécialité ? Les potions !
@@ -108,6 +109,9 @@ Léonnie: Pourquoi pas les deux à la fois ? Non, voyons, respirons un bon coup.
 Léonnie: Fantôme a dit qu'il avait du mal à se souvenir de quelque chose.
 Léonnie: Donc, on sait qu'il s'est passé quelque chose !
 Léonnie: Je connais deux zigotos qui auraient probablement des réponses.
+Léonnie: Je peux aller voir le Maire, toujours en train de manigancer quelque chose.
+Léonnie: Et aussi Vampire, pas le dernier pour semer la zizanie !
+Léonnie: Je vais commencer par...
 - Aller voir le Maire
 	goto # 05 Maire
 - Aller voir Vampire
@@ -117,10 +121,20 @@ Léonnie: Je connais deux zigotos qui auraient probablement des réponses.
 do change_backgrounds("ville")
 do spawn_char("maire 40 20 0.7")
 if hasMaireIndice == false
-	- Apprendre indice Maire
-		do toggle_state("hasMaireIndice")
-		do remove_char("maire")
-		goto # 05 Maire
+	Le Maire du village est un joyeux luron. Parfois trop joyeux.
+	Maire: Ah Lélé ! Ca fait plaisir de te voir !
+	Il a une facheuse tendance à donner des surnoms éclatés aux gens.
+	Léonnie: Haha, oui... Bonjour Maire.
+	Maire: Dis-donc Ninie, vous avez eu la main lourde cette année sur la potion !
+	Léonnie fulmine.
+	Maire: Vous savez quoi ? Si vous réglez ça avant Halloween...
+	Maire: Je vous invite au resto ! Qu'est-ce que vous en dites ? Ca ne se refuse pas !
+	Léonnie: (Je veux disparaître...)
+	Léonnie: Ou alors, on disait qu'il n'y aurait pas de resto en échange ? Hein ?
+	Maire: Haha, Lénou quel humour ! J'adore !
+	Léonnie: (On règlera ça plus tard...)
+	Léonnie: Passons, j'aurais voulu vous poser quelques question m'sieur le Maire.
+	goto # 05 QuestionsMaire
 else
 	Maire: J'ai déjà tout dit ptn...
 - Retourner voir Fantôme
@@ -129,6 +143,42 @@ else
 - Aller voir Vampire
 	do remove_char("maire")
 	goto # 05 Vampire
+	
+# 05 QuestionsMaire
+Maire: Mais bien sûr Nilou ! Pour vous j'ai toujours le temps !
+- Parler beau temps
+	Léonnie: Beau temps n'est-ce pas ? L'Automne, le soleil...
+	Maire: Les citrouilles qui se baladent... Vous êtes sûre de ne rien pouvoir faire à ce sujet ?
+	Léonnie: Oui, bon... Parlons d'autre chose.
+	goto # 05 QuestionsMaire
+- Parler voyages
+	Léonnie: J'ai entendu dire que vous étiez féru de voyages !
+	Maire: Ah oui ? Qui vous en a parlé ?
+	Léonnie: Vous, à chaque fois que je vous croise. Vous parlez beaucoup de vous.
+	Maire: Haha ! Je pourrais croire que vous vous lassez de nos conversations !
+	Maire: Heureusement que je vous connais.
+	Léonnie: Oui, heureusement... 
+	Léonnie: Vous aimez loger chez l'habitant, me semble-t-il ?
+	Maire: Rien de mieux pour apprécier pleinement  la région que l'on visite !
+	Léonnie: Et la prochaine fois, vous pourriez me demander avant de rentrer chez moi ?
+	Maire: Que ?! Enfin Lélé... On se connait mieux que ça !
+	Léonnie: Vous jurez ne pas être venu chez moi pendant mon absence ?
+	Maire: Alors là, croix de bois croix de fer, si je mens je vais en enfer !
+	Maire: Bon, étant un squelette ça ne m'engage pas trop, mais ma parole est ma parole !
+	- S'excuser
+		Léonnie: Très bien, je vous crois... Acceptez mes excuses.
+		Maire: Haha ! Ce n'est rien. C'est n'est pas votre faute.
+	- Pester
+		Léonnie: Mais JPP
+		Maire: Voyons Ninie, j'ai mes défauts mais je n'aime pas mentir. Et d'ailleurs...
+	Maire: Quelqu'un est effectivement passé chez vous.
+	Léonnie: Comment ?! Qui donc ??
+	do toggle_state("hasMaireIndice")
+	Maire: Notre ami aux dents longues ! Je ne sais pas quel projet menait-il.
+- Parler tendances
+	do remove_char("maire")
+	goto # 05 Maire
+
 	
 # 05 Vampire
 do change_backgrounds("ville")
