@@ -18,10 +18,10 @@ export const useBookStore = defineStore('book', () => {
       size: parseFloat(args[3]),
       opacity: 0,
     }
+    const index = pool.push(newItem) - 1
 
-    const length = pool.push(newItem)
     setTimeout(() => {
-      pool[length - 1]!.opacity = 1
+      pool[index]!.opacity = 1
     }, 1)
   }
 
@@ -30,12 +30,17 @@ export const useBookStore = defineStore('book', () => {
     if (item) {
       item.opacity = 0
       setTimeout(() => {
+        // Unspawn
         const index = pool.findIndex((x) => x?.name === item.name)
         if (index != -1) {
           pool[index] = undefined
         }
       }, transitionDelay * 1000)
     }
+  }
+
+  function Clean(pool: (StoryItem | undefined)[]) {
+    pool.length = 0
   }
 
   function printDialogue() {
@@ -75,6 +80,7 @@ export const useBookStore = defineStore('book', () => {
     Spawn,
     Unspawn,
     printDialogue,
+    Clean,
     chars,
     items,
     transitionDelay,

@@ -1,5 +1,6 @@
 
 # 01 Start
+do remove_all_chars()
 Léonnie la sorcière vit paisiblement dans la petite ville de Toussaint-Sainte-Peur.
 Sa spécialité ? Les potions !
 Sur son petit cottage, se dresse une maison à pattes de poules, ainsi qu'un champ de citrouilles.
@@ -11,6 +12,7 @@ Leonnie est en effet chargé de décorer la ville pour Halloween, avec ses sompt
 goto # 02 Waiting
 
 # 02 Waiting
+do remove_all_chars()
 if hasDrinkTea == false
 	Mais rien ne presse...
 else
@@ -28,6 +30,7 @@ else
 goto # 03 Pumpkins
 
 # 03 Pumpkins
+do remove_all_chars()
 do change_backgrounds("champ")
 Mais ?! Où sont elles passées ?!
 Plus une courge à l'horizon !
@@ -84,7 +87,9 @@ Léonnie: Nous voilà dans de beaux draps... Mais qu'est-ce qui cloche à la fin
 		Léonnie: J'imagine que j'ai du mettre autre chose à la place de l'ail.
 		Léonnie: Les citrouilles n'ont pas apprécié ! Quel cauchemar, et Halloween qui approche.
 		Léonnie: Je ne sais pas qui m'a joué ce tour, mais il va voir de quoi se chauffe une sorcière !
-		goto # 04 City
+		- Aller voir en ville
+			Léonnie, furibonde, part d'un pas décidé vers la ville pour tirer cette affaire au clair.
+			goto # 04 City
 	- Inspecter l'étagère
 		do toggle_state("foundGarlic")
 		Tous les ingrédients semblent impecablement rangés sur l'étagère.
@@ -93,12 +98,15 @@ Léonnie: Nous voilà dans de beaux draps... Mais qu'est-ce qui cloche à la fin
 		Léonnie: Je n'en ai pas besoin pour la recette. Il était à la place de...
 		Léonnie: Mais où est l'ail semoule ?!
 		Léonnie: Je vois. Quelqu'un a décidé de jouer avec moi. Voyons comment lui renvoyer l'ascenseur !
-		goto # 04 City
+		- Aller voir en ville
+			Léonnie, furibonde, part d'un pas décidé vers la ville pour tirer cette affaire au clair.
+			goto # 04 City
 - Aller voir en ville
 	Léonnie, furibonde, part d'un pas décidé vers la ville pour tirer cette affaire au clair.
 	goto # 04 City
 
 # 04 City
+do remove_all_chars()
 do change_backgrounds("ville")
 Devant Léonnie se dresse une petite apocalypse.
 Des citrouilles partout ! Dans la rue, par les fenêtres...
@@ -119,6 +127,7 @@ Léonnie: Je vais commencer par...
 
 # 05 Maire
 do change_backgrounds("ville")
+do remove_all_chars()
 do spawn_char("maire 40 20 0.7")
 if hasMaireIndice == false
 	Le Maire du village est un joyeux luron. Parfois trop joyeux.
@@ -134,18 +143,19 @@ if hasMaireIndice == false
 	Maire: Haha, Lénou quel humour ! J'adore !
 	Léonnie: (On règlera ça plus tard...)
 	Léonnie: Passons, j'aurais voulu vous poser quelques question m'sieur le Maire.
+	Maire: Mais bien sûr Nilou ! Pour vous j'ai toujours le temps !
 	goto # 05 QuestionsMaire
 else
-	Maire: J'ai déjà tout dit ptn...
+	Maire: Notre ami Fantôme est louche, c'est moi qui vous le dit !
 - Retourner voir Fantôme
-	do remove_char("maire")
 	goto # 05 Fantome
 - Aller voir Vampire
-	do remove_char("maire")
 	goto # 05 Vampire
 	
 # 05 QuestionsMaire
-Maire: Mais bien sûr Nilou ! Pour vous j'ai toujours le temps !
+do remove_all_chars()
+do spawn_char("maire 35 15 0.85")
+Maire: De quoi vouliez-vous parler ?
 - Parler beau temps
 	Léonnie: Beau temps n'est-ce pas ? L'Automne, le soleil...
 	Maire: Les citrouilles qui se baladent... Vous êtes sûre de ne rien pouvoir faire à ce sujet ?
@@ -166,53 +176,77 @@ Maire: Mais bien sûr Nilou ! Pour vous j'ai toujours le temps !
 	Maire: Alors là, croix de bois croix de fer, si je mens je vais en enfer !
 	Maire: Bon, étant un squelette ça ne m'engage pas trop, mais ma parole est ma parole !
 	- S'excuser
-		Léonnie: Très bien, je vous crois... Acceptez mes excuses.
-		Maire: Haha ! Ce n'est rien. C'est n'est pas votre faute.
+		Léonnie: Très bien, je vous crois... Désolé d'avoir douté de vous.
+		Maire: Haha ! Ce n'est rien. D'autant que...
 	- Pester
-		Léonnie: Mais JPP
-		Maire: Voyons Ninie, j'ai mes défauts mais je n'aime pas mentir. Et d'ailleurs...
+		Léonnie: Mais il s'est passé quelque chose !
+		Léonnie: Je ne rate pas mes potions moi monsieur !
+		Maire: Voyons Ninie, j'ai mes défauts mais je n'aime pas mentir.
+		Maire: D'autant que vous n'avez pas tort.
 	Maire: Quelqu'un est effectivement passé chez vous.
 	Léonnie: Comment ?! Qui donc ??
 	do toggle_state("hasMaireIndice")
-	Maire: Notre ami aux dents longues ! Je ne sais pas quel projet menait-il.
-- Parler tendances
-	do remove_char("maire")
+	Maire: Notre ami tout de drap vêtu ! Je ne sais pas quel projet menait-il.
+	Léonnie: Fantôme est entré chez moi ?? Mais pourquoi donc ?!
+	Maire: C'est un mystère dont je serais ravi de discuter autour de chandelles, Lélé !
+	Léonnie: Mais quel enfer...
+	Léonnie: Encore un surnom, Maire, et il faudra une fouille archéologique pour retrouver tous vos os !
+	Maire: Mais, enfin...
 	goto # 05 Maire
+- Parler tendances
+	Léonnie: Il parait que les Pin's sont de retour à la mode !
+	Maire: Oui, moi-même j'en ai un à mon effigie. Je l'adore !
+	Léonnie: C'est vous que vous adorez, Maire.
+	Maire: Eh bien... Oui, c'est juste !
+	goto # 05 QuestionsMaire
+- Aller voir Vampire
+	goto # 05 Vampire
 
 	
 # 05 Vampire
 do change_backgrounds("ville")
+do remove_all_chars()
 do spawn_char("vampire 40 20 0.7")
 if hasVampireIndice == false
 	- Apprendre indice Vampire
 		do toggle_state("hasVampireIndice")
-		do remove_char("vampire")
+		Vampire: eh oué c moi mdr
+		Léonnie: oh batar
 		goto # 05 Vampire
 else
 	Vampire: J'ai déjà tout dit ptn...
 - Retourner voir Fantôme
-	do remove_char("vampire")
 	goto # 05 Fantome
 - Aller voir Maire
-	do remove_char("vampire")
 	goto # 05 Maire
 
 # 05 Fantome
 do change_backgrounds("champ")
+do remove_all_chars()
 do spawn_char("fantome 30 20 0.6")
-Fantôme: "Bouh !" mdr.
-Léonnie: ptn t con c abusé
-- Go boire la popo
-	do remove_char("fantome")
-	goto # 06 Choix Potion
+if hasMaireIndice == true && hasVampireIndice == true
+	expliquer que c'est le fantome même s'il a perdu la mémoire
+	le fantome dévoile un bail qui permet de régler le souci genre la quantité utilisé
+	- Go boire la popo
+		goto # 06 Choix Potion
+else
+	Fantôme: c pa moi
+	- Aller voir Vampire
+		goto # 05 Vampire
+	- Aller voir Maire
+		goto # 05 Maire
+
 
 # 06 Choix Potion
+do remove_all_chars()
 do change_backgrounds("attaque-ville")
-miam miam la popo 2 rockent
+léonnie craft un antidote au choix parmis X choix
+le joueur peut revenir ici pour relancer d'autres choix
 - Go combat finalent
 	goto # 07 Combat Final Rock
 
 # 07 Combat Final Rock
+do remove_all_chars()
 do change_backgrounds("leonnie-rap-ending")
 mdr gg
 

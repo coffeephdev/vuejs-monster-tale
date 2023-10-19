@@ -86,6 +86,10 @@ DialogueManager.gameStates = [
       store.Unspawn(name, store.chars)
     },
 
+    remove_all_chars() {
+      store.Clean(store.chars)
+    },
+
     remove_item(name: string) {
       store.Unspawn(name, store.items)
     },
