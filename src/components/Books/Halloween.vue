@@ -19,6 +19,13 @@
         class="next-dialogue-button"
         v-if="hasNextDialogue"
         @click="(e) => nextDialogue(e)"
+        @mousemove="
+          (e) => {
+            if (e.shiftKey) {
+              nextDialogue(e)
+            }
+          }
+        "
         :disabled="disableClick"
       >
         ☞
@@ -92,6 +99,10 @@ DialogueManager.gameStates = [
 
     remove_item(name: string) {
       store.Unspawn(name, store.items)
+    },
+
+    has_both_clues() {
+      return this.hasMaireIndice && this.hasVampireIndice
     },
   },
 ]

@@ -72,7 +72,7 @@ Léonnie: Nous voilà dans de beaux draps... Mais qu'est-ce qui cloche à la fin
 	Léonnie: Il est brodé, mais je ne reconnais pas la signature.
 	Léonnie: Brave citrouille, tu as voulu défendre le champ ? Quelle mauvaise graine a piqué les autres...
 	Léonnie: Allons voir ça de plus près !
-	goto # 04 City
+	goto # 04 Before City
 - Inspecter le chaudron
 	Il ne semble pas à Léonnie avoir raté la recette mais...
 	Léonnie: Mieux vaut vérifier deux fois, pas vrai ?
@@ -87,9 +87,7 @@ Léonnie: Nous voilà dans de beaux draps... Mais qu'est-ce qui cloche à la fin
 		Léonnie: J'imagine que j'ai du mettre autre chose à la place de l'ail.
 		Léonnie: Les citrouilles n'ont pas apprécié ! Quel cauchemar, et Halloween qui approche.
 		Léonnie: Je ne sais pas qui m'a joué ce tour, mais il va voir de quoi se chauffe une sorcière !
-		- Aller voir en ville
-			Léonnie, furibonde, part d'un pas décidé vers la ville pour tirer cette affaire au clair.
-			goto # 04 City
+		goto # 04 Before City
 	- Inspecter l'étagère
 		do toggle_state("foundGarlic")
 		Tous les ingrédients semblent impecablement rangés sur l'étagère.
@@ -98,12 +96,13 @@ Léonnie: Nous voilà dans de beaux draps... Mais qu'est-ce qui cloche à la fin
 		Léonnie: Je n'en ai pas besoin pour la recette. Il était à la place de...
 		Léonnie: Mais où est l'ail semoule ?!
 		Léonnie: Je vois. Quelqu'un a décidé de jouer avec moi. Voyons comment lui renvoyer l'ascenseur !
-		- Aller voir en ville
+		goto # 04 Before City
+	
+# 04 Before City
+Léonnie est déterminée à éclaircir ce mystère avant qu'il puisse gâcher Halloween.
+- Aller voir en ville
 			Léonnie, furibonde, part d'un pas décidé vers la ville pour tirer cette affaire au clair.
 			goto # 04 City
-- Aller voir en ville
-	Léonnie, furibonde, part d'un pas décidé vers la ville pour tirer cette affaire au clair.
-	goto # 04 City
 
 # 04 City
 do remove_all_chars()
@@ -147,6 +146,7 @@ if hasMaireIndice == false
 	goto # 05 QuestionsMaire
 else
 	Maire: Notre ami Fantôme est louche, c'est moi qui vous le dit !
+	Maire: Je l'ai vu s'introduire chez vous quand je suis passé admirer les citrouilles.
 - Retourner voir Fantôme
 	goto # 05 Fantome
 - Aller voir Vampire
@@ -188,6 +188,7 @@ Maire: De quoi vouliez-vous parler ?
 	do toggle_state("hasMaireIndice")
 	Maire: Notre ami tout de drap vêtu ! Je ne sais pas quel projet menait-il.
 	Léonnie: Fantôme est entré chez moi ?? Mais pourquoi donc ?!
+	Maire: Je ne saurais dire, j'étais venu contempler les citrouilles, figurez-vous !
 	Maire: C'est un mystère dont je serais ravi de discuter autour de chandelles, Lélé !
 	Léonnie: Mais quel enfer...
 	Léonnie: Encore un surnom, Maire, et il faudra une fouille archéologique pour retrouver tous vos os !
@@ -224,29 +225,63 @@ else
 do change_backgrounds("champ")
 do remove_all_chars()
 do spawn_char("fantome 30 20 0.6")
-if hasMaireIndice == true && hasVampireIndice == true
+Fantôme: C'est toi Léonnie ? Tu as appris quelque chose ?
+if has_both_clues()
 	expliquer que c'est le fantome même s'il a perdu la mémoire
 	le fantome dévoile un bail qui permet de régler le souci genre la quantité utilisé
 	- Go boire la popo
 		goto # 06 Choix Potion
+elif hasMaireIndice == true
+	Léonnie: Dis-donc Fantôme...
+	do remove_char("fantome")
+	Fantôme: Oh non...
+	Léonnie: Il paraitrait que tu t'es introduit chez moi ! Tu aurais une explication ?
+	do spawn_char("fantome 35 20 0.7")
+	Fantôme: Vraiment ? J'ai fait ça ?
+	Léonnie: Oui, c'est le Maire qui me l'a dit. Tu ne t'en rappelle vraiment pas ?
+	do remove_char("fantome")
+	Fantôme: Désolé, vraiment... Je te le dirais, je le jure !
+	do remove_char("fantome")
+	Léonnie soupire
+	Léonnie: Très bien, j'imagine que je n'aime plus qu'à interroger Vampire, dans ce cas !
+	do spawn_char("fantome 30 20 0.6")
+	- Aller voir Maire
+		goto # 05 Maire
+	- Aller voir Vampire
+		goto # 05 Vampire
+elif hasVampireIndice == true
+	Fantôme: Ha ptn sa degoute
+	Léonnie: oe
+	- Aller voir Maire
+		goto # 05 Maire
+	- Aller voir Vampire
+		goto # 05 Vampire
 else
-	Fantôme: c pa moi
+	Léonnie: Non, toujours rien. Tu es sûr de ne rien te rappeler ?
+	Vampire: Non... Seulement de m'être évanoui à un moment... Mmh...
 	- Aller voir Vampire
 		goto # 05 Vampire
 	- Aller voir Maire
 		goto # 05 Maire
 
-
 # 06 Choix Potion
 do remove_all_chars()
 do change_backgrounds("attaque-ville")
-léonnie craft un antidote au choix parmis X choix
-le joueur peut revenir ici pour relancer d'autres choix
-- Go combat finalent
-	goto # 07 Combat Final Rock
+Dans la ville, certaines citrouilles colériques se sont rassemblées.
+Elle forment un seul et même gigantesque cucurbitacé !
+Léonnie: Oh non !
+Léonnie: Il faut vraiment intervenir maintenant...
+Léonnie: Sinon toute la ville va être rasée !
+Léonnie: Heureusement, j'ai paré à toute éventualité ! 
+Léonnié: Je vais boire ma potion de...
+- Répartie
+	goto # 07 Combat Final Rap
 
-# 07 Combat Final Rock
+# 07 Combat Final Rap
 do remove_all_chars()
 do change_backgrounds("leonnie-rap-ending")
-mdr gg
-
+Léonnie sort son micro ensorcelée, et commence à balancer punchline sur punchline à Citrouillezilla !
+Léonnie: "T'es pas la citrouille la plus arrosée du champ, à ta place je ficherais le camp !"
+Citrouillezilla ne sait pas quoi répondre, elle se considère clashée !
+Elle s'effondre dans des hurlements infernaux.
+Léonnie: C'était pas de la tarte, mais on en est venu à bout !
