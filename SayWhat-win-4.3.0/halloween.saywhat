@@ -70,8 +70,12 @@ Léonnie: Nous voilà dans de beaux draps... Mais qu'est-ce qui cloche à la fin
 	Dégagée de ses racines, elle a l'air d'avoir mordu un...
 	Léonnie: ...mouchoir ? Mais qu'est-ce qu'un mouchoir fait ici ?!
 	Léonnie: Il est brodé, mais je ne reconnais pas la signature.
+	Léonnie: Il est tâché... Tiens, ça sent l'ail ? C'est bizarre.
+	do toggle_state("foundGarlic")
 	Léonnie: Brave citrouille, tu as voulu défendre le champ ? Quelle mauvaise graine a piqué les autres...
 	Léonnie: Allons voir ça de plus près !
+	goto # 04 Before City
+- Aller en ville
 	goto # 04 Before City
 - Inspecter le chaudron
 	Il ne semble pas à Léonnie avoir raté la recette mais...
@@ -202,24 +206,82 @@ Maire: De quoi vouliez-vous parler ?
 	goto # 05 QuestionsMaire
 - Aller voir Vampire
 	goto # 05 Vampire
+- Aller voir Fantôme
+	goto # 05 Fantome
 
-	
 # 05 Vampire
-do change_backgrounds("ville")
 do remove_all_chars()
+do change_backgrounds("ville")
 do spawn_char("vampire 40 20 0.7")
 if hasVampireIndice == false
-	- Apprendre indice Vampire
-		do toggle_state("hasVampireIndice")
-		Vampire: eh oué c moi mdr
-		Léonnie: oh batar
-		goto # 05 Vampire
+	Vampire: Salut Léonnie ! T'en tire une tête !
+	Vampire: Quelque chose te tracasse peut-être ?
+	Vampire est un être compliqué, qui a tendance à ironiser et se moquer de tout.
+	Léonnie: Si tu as des moqueries, faisons une trève pour ce soir. J'ai de gros problèmes !
+	Vampire: J'ai entendu kr kr. Euh pardon. Oui ? Que puis-je faire pour t'aider ? Kr kr.
+	Léonnie: J'ai besoin de te poser quelques questions, Fantôme a perdu la mémoire...
+	Vampire: Oh bah je tombe des nues kr kr. Euh pardon. Oui ?
+	Léonnie soupire.
+	goto # 05 Vampire questions
 else
-	Vampire: J'ai déjà tout dit ptn...
-- Retourner voir Fantôme
-	goto # 05 Fantome
-- Aller voir Maire
-	goto # 05 Maire
+	Vampire: C'est vraiment dommage quelqu'un ait rajouté de l'ail dans la potion!
+	Vampire: J'espère que tu sauras t'en sortir. Kr kr.
+	- Attends, de l'ail ? [if foundGarlic == true]
+		if foundTruth == true
+			Vampire: Oui, bon, on en a déjà parlé... C'est moi qui ait manipulé ta potion...
+			goto # 05 Vampire
+		else
+			Vampire: Ben oui, forcément ! Avec de l'ail en plus...
+			Léonnie: De l'ail, oui... C'est marrant, il s'est passé... Attends, quoi ?
+			Vampire: Quoi, quoi ?
+			Léonnie: Je n'ai pas parlé d'ail.
+			Vampire: Zut...
+			Léonnie: C'était toi, pas vrai ?
+			Vampire: Peut-être...
+			Léonnie: Mais pourquoi as-tu fais ça ?!
+			Vampire: J'aime pas l'ail, ça me fait tousser...
+			do toggle_state("foundTruth")
+			Vampire: J'ai voulu débarrasser Toussaint-Sainte-Peur de la terreur bulbeuse !
+			Léonnie: Et en plus tu me fais porter le chapeau ! C'est pas très cool.
+			Vampire: Oui bon... Désolé. Kr kr. Euh pardon. Réflexe.
+			goto # 05 Vampire
+	- Aller voir Fantôme
+		goto # 05 Fantome
+	- Aller voir Maire
+		goto # 05 Maire
+
+# 05 Vampire questions
+- Pourquoi t'as l'air si louche ?
+	Vampire: Boh alors Léonnie, c'est pas des choses qui se disent kr kr.
+	Léonnie: Mais ta façon de rigoler en faisant "kr kr" là, on dirait que tu te moques.
+	Vampire: Mais non voyons. Ou peut-être que si ? Qui peut dire ?
+	Léonnie: Oh, bon. Je vois que cette conversation ne nous mènera nulle part.
+	goto # 05 Vampire questions
+	
+- Tu penses quoi du Maire ?
+	Vampire: Il est rigolo.
+	Léonnie: Rigolo comment ?
+	Vampire: Il a des avis arriérés et il fait semblant de pas s'en rendre compte.
+	Vampire: Je pense qu'il se ment à lui-même, ça le rend rigolo.
+	Léonnie: Je ne peux pas démentir...
+	goto # 05 Vampire questions
+	
+- Hier soir
+	Léonnie: Tu as vu quelque chose hier soir ? Il s'est passé quelque chose d'étrange.
+	Vampire: Tu veux dire, plus que d'habitude ? Etrange comment ?
+	Léonnie: Oui, forcément... Tu sais que je ne rate jamais mes potions ?
+	Vampire: C'est ce que j'ai entendu dire kr kr. Pourquoi ?
+	Léonnie: Ne fais pas semblant, tu sais ce qui est arrivé aux citrouilles, non ?
+	Vampire: Ah, celles qui attaquent la ville ? Oui j'en ai entendu parler kr kr.
+	Léonnie: Allons Vampire, Halloween et Toussaint-Sainte-Peur sont en danger !
+	Vampire: D'accord, d'accord... Quelqu'un a mélangé les ingrédients de ta potion !
+	Léonnie: Quoi ?! Comment tu le sais ?
+	Vampire: J'ai vu une silhouette par la fenêtre de ton atelier !
+	Vampire: Mais je ne saurais pas dire qui. Il faisait noir.
+	do toggle_state("hasVampireIndice")
+	Léonnie: Ca fait sens. Quel gâchis. Je comprends que les citrouilles aient mal réagi !
+	Léonnie: Merci Vampire, l'énigme s'éclaircit !
+	goto # 05 Vampire
 
 # 05 Fantome
 do change_backgrounds("champ")
@@ -227,10 +289,38 @@ do remove_all_chars()
 do spawn_char("fantome 30 20 0.6")
 Fantôme: C'est toi Léonnie ? Tu as appris quelque chose ?
 if has_both_clues()
-	expliquer que c'est le fantome même s'il a perdu la mémoire
-	le fantome dévoile un bail qui permet de régler le souci genre la quantité utilisé
-	- Go boire la popo
-		goto # 06 Choix Potion
+	Léonnie: Oui, ça y est ! Le Maire dit qu'il t'as vu "rôder" près de chez moi...
+	Léonnie: Et Vampire sait que quelqu'un a touché à ma potion!
+	if foundTruth == true
+		Léonnie: Il le sait bien, car c'était lui, en fait ! En voulant faire disparaitre l'ail.
+		Fantôme: Oooh, ça explique tout ! L'ail me fait éternuer si fort que je m'évanouis.
+		Fantôme: J'ai du en oublier quelques minutes. Ooohh...
+		Léonnie: Heureusement, le voile du mystère est levé !
+		Léonnie: Désolé que tu ais été agressé Fantôme, nous reparlerons de tout ça!
+		Fantôme: Oooh ce n'est rien... Fonce, à tout à l'heure !
+		Léonnie file en direction de la ville...
+		Elle peut enfin mettre un terme à la zizanie qui règne à Toussaint-Sainte-Peur !
+		goto # 07 Choix Potion
+	else
+		Léonnie: Si on fait le lien entre les deux...
+		Fantôme: Ooooh non, tu penses que c'est moi !
+		do remove_char("fantome")
+		Léonnie: Enfin, Fantôme, c'est logique, tout simplement logique !
+		do spawn_char("fantome 30 20 0.6")
+		Fantôme: Je te promets que ce n'est pas moi...
+		Léonnie: Je veux bien te croire, mais il me faudrait d'autres éléments, cher ami.
+		Fantôme: Tu sais, pendant ton enquête, j'ai un peu enquêté...
+		Léonnie: Tu as trouvé quelque chose ?
+		Fantôme: Je ne sais pas si ça peut aider mais...
+		Fantôme: Il y avait de l'ail par terre...
+		do toggle_state("foundGarlic")
+		Fantôme: J'y suis allergique ! L'ail me fait éternuer si fort que je m'évanouis.
+		Fantôme: J'ai du en oublier quelques minutes. Ooohh...
+		Léonnie: De l'ail ?! Mmh... Ne bouge pas, j'ai une question à poser à quelqu'un.
+		- Aller voir Maire
+			goto # 05 Maire
+		- Aller voir Vampire
+			goto # 05 Vampire
 elif hasMaireIndice == true
 	Léonnie: Dis-donc Fantôme...
 	do remove_char("fantome")
@@ -250,8 +340,10 @@ elif hasMaireIndice == true
 	- Aller voir Vampire
 		goto # 05 Vampire
 elif hasVampireIndice == true
-	Fantôme: Ha ptn sa degoute
-	Léonnie: oe
+	Léonnie: Quelqu'un a manipulé la potion...
+	Fantôme: Ooooh je suis désolé pour toi Léonnie...
+	Léonnie: Je sens que ce mystère est cousu de fil blanc. Je vais éclaircir tout ça.
+	Fantôme: Je crois en toi Léonnie !
 	- Aller voir Maire
 		goto # 05 Maire
 	- Aller voir Vampire
@@ -263,8 +355,8 @@ else
 		goto # 05 Vampire
 	- Aller voir Maire
 		goto # 05 Maire
-
-# 06 Choix Potion
+		
+# 07 Choix Potion
 do remove_all_chars()
 do change_backgrounds("attaque-ville")
 Dans la ville, certaines citrouilles colériques se sont rassemblées.
@@ -272,16 +364,19 @@ Elle forment un seul et même gigantesque cucurbitacé !
 Léonnie: Oh non !
 Léonnie: Il faut vraiment intervenir maintenant...
 Léonnie: Sinon toute la ville va être rasée !
-Léonnie: Heureusement, j'ai paré à toute éventualité ! 
+Léonnie: Heureusement, j'ai paré à toute éventualité !
+Léonnie: Il faut que je choisisse judicieusement une potion qui puisse m'aider.
 Léonnié: Je vais boire ma potion de...
 - Répartie
-	goto # 07 Combat Final Rap
+	goto # 08 Combat Final Rap
 
-# 07 Combat Final Rap
+# 08 Combat Final Rap
 do remove_all_chars()
 do change_backgrounds("leonnie-rap-ending")
 Léonnie sort son micro ensorcelée, et commence à balancer punchline sur punchline à Citrouillezilla !
 Léonnie: "T'es pas la citrouille la plus arrosée du champ, à ta place je ficherais le camp !"
+Léonnie: "Marrant ta couleur, face de potiron. T'es orange parce que tu veux de l'attention !"
 Citrouillezilla ne sait pas quoi répondre, elle se considère clashée !
 Elle s'effondre dans des hurlements infernaux.
 Léonnie: C'était pas de la tarte, mais on en est venu à bout !
+The end ~ ~
