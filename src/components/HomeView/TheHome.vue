@@ -1,5 +1,5 @@
 <template lang="pug">
-.welcome
+.welcome(:style="{ '--bg-img': `url(${TitleScreenImg})` }")
   BigButton(id="enter-button" @click="handleClick") Entrer
   .credits
     p 📜 Givr_
@@ -11,20 +11,22 @@ import { defineComponent } from 'vue'
 import BigButton from './BigButton.vue'
 import router from '../../router/index'
 
+import TitleScreenImg from "@/assets/title-screen.png"
+
 export default defineComponent({
   setup() {
     const handleClick = () => {
       router.push('books')
     }
-    return { handleClick }
+    return { handleClick, TitleScreenImg }
   },
-  components: { BigButton },
+  components: { BigButton, },
 })
 </script>
 
 <style scoped lang="scss">
 .welcome {
-  background: no-repeat url(src\assets\title-screen.png);
+  background: no-repeat var(--bg-img);
   background-size: cover;
   width: 100%;
   height: 100%;

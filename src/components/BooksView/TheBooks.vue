@@ -1,5 +1,5 @@
 <template lang="pug">
-div(class="content")
+div(class="content" :style="{ '--bg-img': `url(${MenuImg})` }")
   h1 Choisissez une histoire
   book-button(title="Halloween" @click="handleBookChoice('halloween')")
 
@@ -9,6 +9,7 @@ div(class="content")
 import router from '@/router/index'
 import bookButton from './bookButton.vue'
 import BookButton from './bookButton.vue'
+import MenuImg from "@/assets//monster-tale-menu.png"
 
 const handleBookChoice = (book: string) => {
   router.push(`books/${book}`)
@@ -17,7 +18,7 @@ const handleBookChoice = (book: string) => {
 
 <style lang="scss">
 .content {
-  background: no-repeat url(src/assets/monster-tale-menu.png);
+  background: no-repeat var(--bg-img);
   background-size: cover;
   width: 100%;
   height: 100%;
