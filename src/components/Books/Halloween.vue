@@ -1,5 +1,5 @@
 <template>
-  <div class="book-content" :style="backgroundClass">
+ <div class="book-content" :style="{ backgroundImage: backgroundClass }">
     <div class="occluder" :style="`opacity:${occluderOpacity}`" />
     <div class="dialogue-wrapper">
       <div class="character-name" v-if="characterName">{{ characterName }}</div>
@@ -58,12 +58,10 @@ import DialogueManager from '@nathanhoad/saywhat'
 import DialogueResource from '@/assets/halloween/halloween.json'
 import { useBookStore } from './book-store'
 const store = useBookStore()
-const dataPath = '/src/assets/halloween/items'
 const images = import.meta.glob('/src/assets/halloween/items/*', { eager: true, as: 'url' })
-console.log(images);
-
-
+const occluderOpacity = ref(0)
 const disableClick = ref(false)
+const line = ref()
 
 DialogueManager.gameStates = [
   {
@@ -114,11 +112,10 @@ DialogueManager.gameStates = [
   },
 ]
 
-
-
 const findImage = (name: string) => {
   for (const path in images) {
     if (path.includes(`/${name}.`)) {
+
       return images[path]
     }
   }
@@ -126,20 +123,11 @@ const findImage = (name: string) => {
   return ''
 }
 
-const line = ref()
-
 const backgroundClass = computed(() => {
-  let result = 'background-image: '
-  store.backgrounds.forEach((image, index) => {
-    const key = `url(${dataPath}/${image}.png)`
-    result += key
-    if (index != store.backgrounds.length - 1) {
-      result += ', '
-    }
-  })
-  return result
+  return store.backgrounds
+    .map(img => `url(${findImage(img)})`)
+    .join(', ')
 })
-const occluderOpacity = ref(0)
 
 onMounted(async () => {
   store.backgrounds = ['intro']
