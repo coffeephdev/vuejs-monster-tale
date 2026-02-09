@@ -58,7 +58,6 @@ import DialogueManager from '@nathanhoad/saywhat'
 import DialogueResource from '@/assets/halloween/halloween.json'
 import { useBookStore } from './book-store'
 const store = useBookStore()
-const images = import.meta.glob('/src/assets/halloween/items/*', { eager: true, as: 'url' })
 
 const disableClick = ref(false)
 
@@ -112,6 +111,8 @@ DialogueManager.gameStates = [
 ]
 
 const dataPath = '/src/assets/halloween/items'
+const images = import.meta.glob('/@assets/halloween/items/*', { eager: true, as: 'url' })
+
 const line = ref()
 
 const backgroundClass = computed(() => {
