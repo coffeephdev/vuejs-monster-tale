@@ -24,7 +24,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .welcome {
-  background: no-repeat url(src/assets/monster-tale-menu.png);
+  background: no-repeat url(src\assets\title-screen.png);
   background-size: cover;
   width: 100%;
   height: 100%;
