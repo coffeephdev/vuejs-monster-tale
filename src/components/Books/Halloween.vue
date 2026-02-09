@@ -35,7 +35,7 @@
       <img
         v-if="item"
         class="character-gif"
-        :src="getItemSrc(item.name)"
+:src="findImage(item.name)"
         :style="getStoryItemStyle(item)"
         :alt="item.name"
       />
@@ -44,7 +44,7 @@
       <img
         v-if="char"
         class="character-gif"
-        :src="getCharSrc(char.name)"
+:src="findImage(char.name)"
         :style="getStoryItemStyle(char)"
         :alt="char.name + 'Character'"
       />
@@ -58,6 +58,8 @@ import DialogueManager from '@nathanhoad/saywhat'
 import DialogueResource from '@/assets/halloween/halloween.json'
 import { useBookStore } from './book-store'
 const store = useBookStore()
+const dataPath = '/src/assets/halloween/items'
+const images = import.meta.glob('/src/assets/halloween/items/*', { eager: true, as: 'url' })
 
 const disableClick = ref(false)
 
@@ -110,8 +112,17 @@ DialogueManager.gameStates = [
   },
 ]
 
-const dataPath = '/src/assets/halloween/items'
-const images = import.meta.glob('/@assets/halloween/items/*', { eager: true, as: 'url' })
+
+
+const findImage = (name: string) => {
+  for (const path in images) {
+    if (path.includes(`/${name}.`)) {
+      return images[path]
+    }
+  }
+  console.warn(`Image not found: ${name}`)
+  return ''
+}
 
 const line = ref()
 
@@ -172,16 +183,6 @@ async function nextDialogue(e: Event, reponseNextId?: number) {
       disableClick.value = false
     }, store.transitionDelay * 1000)
   }
-}
-
-function getCharSrc(name: string) {
-  const key = `${dataPath}/${name}.gif`
-  return images[key] || ''
-}
-
-function getItemSrc(name: string) {
-  const key = `${dataPath}/${name}.png`
-  return images[key] || ''
 }
 
 function getStoryItemStyle(storyItem: StoryItem) {
