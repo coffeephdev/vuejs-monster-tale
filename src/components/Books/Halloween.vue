@@ -117,7 +117,8 @@ const line = ref()
 const backgroundClass = computed(() => {
   let result = 'background-image: '
   store.backgrounds.forEach((image, index) => {
-    result += `url(${dataPath}/${image}.png)`
+    const key = `url(${dataPath}/${image}.png)`
+    result += key
     if (index != store.backgrounds.length - 1) {
       result += ', '
     }
@@ -173,11 +174,13 @@ async function nextDialogue(e: Event, reponseNextId?: number) {
 }
 
 function getCharSrc(name: string) {
-  return `${dataPath}/${name}.gif`
+  const key = `${dataPath}/${name}.gif`
+  return images[key] || ''
 }
 
 function getItemSrc(name: string) {
-  return `${dataPath}/${name}.png`
+  const key = `${dataPath}/${name}.png`
+  return images[key] || ''
 }
 
 function getStoryItemStyle(storyItem: StoryItem) {
