@@ -1,10 +1,9 @@
 <template lang="pug">
 .welcome
   BigButton(id="enter-button" @click="handleClick") Entrer
-  //- .credits
-    a(href="https://twitter.com/Givr_") 📜 Givr_
-    a(href="https://twitter.com/JanePrigent") 🎨 Jane Prigent
-    a(href="https://twitter.com/myuusic") 🎼 Myuu
+  .credits
+    p 📜 Givr_
+    p 🎨 Jane Prigent
 </template>
 
 <script lang="ts">

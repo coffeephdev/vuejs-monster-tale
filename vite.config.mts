@@ -1,9 +1,9 @@
 import { fileURLToPath, URL } from 'url'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
 
 export default async () => {
   const { defineConfig } = await import('vite')
+  const { default: vue } = await import('@vitejs/plugin-vue')
+  const { default: vueJsx } = await import('@vitejs/plugin-vue-jsx')
 
   return defineConfig({
     plugins: [vue(), vueJsx()],
