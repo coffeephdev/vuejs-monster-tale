@@ -60,6 +60,8 @@ import { useBookStore } from './book-store'
 const store = useBookStore()
 const dataPath = '/src/assets/halloween/items'
 const images = import.meta.glob('/src/assets/halloween/items/*', { eager: true, as: 'url' })
+console.log(images);
+
 
 const disableClick = ref(false)
 
