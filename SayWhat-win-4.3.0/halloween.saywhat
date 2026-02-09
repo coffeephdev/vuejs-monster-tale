@@ -20,7 +20,7 @@ else
 	- Aller voir les citrouilles
 	goto # 03 Pumpkins
 - Boire une lampée 
-	do spawn_item("tea 30 10 0.6")
+	do spawn_item("tea 30 25 0.35")
 	Mmh, au bon goût de citrouille ! Sa tisane préférée.
 	Cultivée à l'aide de la potion familiale, le goût est plus intense !
 	do remove_item("tea")
@@ -129,10 +129,10 @@ Léonnie: Je vais commencer par...
 	goto # 05 Vampire
 
 # 05 Maire
-do change_backgrounds("ville")
+do change_backgrounds("manoir")
 do remove_all_chars()
 do spawn_char("maire 40 20 0.7")
-if hasMaireIndice == false
+if hasMeetMaire == false
 	Le Maire du village est un joyeux luron. Parfois trop joyeux.
 	Maire: Ah Lélé ! Ca fait plaisir de te voir !
 	Il a une facheuse tendance à donner des surnoms éclatés aux gens.
@@ -145,7 +145,10 @@ if hasMaireIndice == false
 	Léonnie: Ou alors, on disait qu'il n'y aurait pas de resto en échange ? Hein ?
 	Maire: Haha, Lénou quel humour ! J'adore !
 	Léonnie: (On règlera ça plus tard...)
-	Léonnie: Passons, j'aurais voulu vous poser quelques question m'sieur le Maire.
+	Léonnie: Passons...
+	do toggle_state("hasMeetMaire")
+if hasMaireIndice == false
+	Léonnie: J'aurais voulu vous poser quelques question m'sieur le Maire.
 	Maire: Mais bien sûr Nilou ! Pour vous j'ai toujours le temps !
 	goto # 05 QuestionsMaire
 else
@@ -157,6 +160,7 @@ else
 	goto # 05 Vampire
 	
 # 05 QuestionsMaire
+do change_backgrounds("manoir")
 do remove_all_chars()
 do spawn_char("maire 35 15 0.85")
 Maire: De quoi vouliez-vous parler ?
@@ -213,12 +217,14 @@ Maire: De quoi vouliez-vous parler ?
 do remove_all_chars()
 do change_backgrounds("ville")
 do spawn_char("vampire 40 20 0.7")
-if hasVampireIndice == false
+if hasMeetVampire == false
 	Vampire: Salut Léonnie ! T'en tire une tête !
 	Vampire: Quelque chose te tracasse peut-être ?
 	Vampire est un être compliqué, qui a tendance à ironiser et se moquer de tout.
 	Léonnie: Si tu as des moqueries, faisons une trève pour ce soir. J'ai de gros problèmes !
 	Vampire: J'ai entendu kr kr. Euh pardon. Oui ? Que puis-je faire pour t'aider ? Kr kr.
+	do toggle_state("hasMeetVampire")
+if hasVampireIndice == false
 	Léonnie: J'ai besoin de te poser quelques questions, Fantôme a perdu la mémoire...
 	Vampire: Oh bah je tombe des nues kr kr. Euh pardon. Oui ?
 	Léonnie soupire.
@@ -313,7 +319,8 @@ if has_both_clues()
 		Léonnie: Tu as trouvé quelque chose ?
 		Fantôme: Je ne sais pas si ça peut aider mais...
 		Fantôme: Il y avait de l'ail par terre...
-		do toggle_state("foundGarlic")
+		if foundGarlic == false
+			do toggle_state("foundGarlic")
 		Fantôme: J'y suis allergique ! L'ail me fait éternuer si fort que je m'évanouis.
 		Fantôme: J'ai du en oublier quelques minutes. Ooohh...
 		Léonnie: De l'ail ?! Mmh... Ne bouge pas, j'ai une question à poser à quelqu'un.
@@ -358,7 +365,7 @@ else
 		
 # 07 Choix Potion
 do remove_all_chars()
-do change_backgrounds("attaque-ville")
+do change_backgrounds("ville-citrouille")
 Dans la ville, certaines citrouilles colériques se sont rassemblées.
 Elle forment un seul et même gigantesque cucurbitacé !
 Léonnie: Oh non !

@@ -68,6 +68,8 @@ DialogueManager.gameStates = [
     hasVampireIndice: false,
     foundGarlic: false,
     foundTruth: false,
+    hasMeetMaire: false,
+    hasMeetVampire: false,
 
     toggle_state(param: string) {
       this[param] = !this[param]
@@ -108,15 +110,13 @@ DialogueManager.gameStates = [
   },
 ]
 
-const dataPath = 'https://www.givr.fr/monster-tale-images/halloween'
+const dataPath = '/src/assets/halloween/items'
 const line = ref()
-const audioClickFeedback = new Audio(`${dataPath}/audio/click.mp3`)
-const audioBackground = new Audio(`${dataPath}/audio/TipToes - Myuu.mp3`)
 
 const backgroundClass = computed(() => {
   let result = 'background-image: '
   store.backgrounds.forEach((image, index) => {
-    result += `url(${dataPath}/backgrounds/${image})`
+    result += `url(${dataPath}/${image}.png)`
     if (index != store.backgrounds.length - 1) {
       result += ', '
     }
@@ -133,16 +133,6 @@ onMounted(async () => {
   )
   store.currentDialogue = line.value?.dialogue ?? null
   store.printDialogue()
-
-  Array.of(audioBackground, audioClickFeedback).forEach(
-    (audio) => (audio.volume = store.audioVolume)
-  )
-  audioBackground.loop = true
-  audioBackground.play()
-})
-
-onUnmounted(() => {
-  audioBackground.pause()
 })
 
 const characterName = computed<string | undefined>(() => {
@@ -158,7 +148,7 @@ const responses = computed<any[]>(() => {
 })
 
 const hasReponses = computed<boolean>(() => {
-  return line.value?.responses.length != 0 ?? false
+  return line.value?.responses.length != 0
 })
 
 const isNarrator = computed(() => {
@@ -174,8 +164,6 @@ async function nextDialogue(e: Event, reponseNextId?: number) {
   // Allow skip transition if user press ctrl
   if (!e.ctrlKey) {
     disableClick.value = true
-    audioClickFeedback.currentTime = 0
-    audioClickFeedback.play()
 
     setTimeout(() => {
       disableClick.value = false
@@ -184,11 +172,11 @@ async function nextDialogue(e: Event, reponseNextId?: number) {
 }
 
 function getCharSrc(name: string) {
-  return `${dataPath}/characters/${name}`
+  return `${dataPath}/${name}.gif`
 }
 
 function getItemSrc(name: string) {
-  return `${dataPath}/items/${name}`
+  return `${dataPath}/${name}.png`
 }
 
 function getStoryItemStyle(storyItem: StoryItem) {

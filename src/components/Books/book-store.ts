@@ -49,16 +49,19 @@ export const useBookStore = defineStore('book', () => {
       return
     }
 
+    let feedWord: undefined | number
+
     if (feedWord) {
       clearInterval(feedWord)
     }
 
+    if (!currentDialogue.value)
+      return
+
     const initialDialogue = currentDialogue.value
 
-    // virer ça et append les char plutôt
     currentDialogue.value = ' '.repeat(initialDialogue.length)
     let indice = 0
-    let feedWord: undefined | number
     if (!feedWord) {
       feedWord = setInterval(() => {
         // 3 par 3 pour fluidifier le spawn de char
